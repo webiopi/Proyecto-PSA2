@@ -1,0 +1,50 @@
+{% extends "base.html" %}
+{% from "_macros.html" import flash %}
+{% block bodyclass %}app{% endblock %}
+{% block body %}
+<div class="shell">
+  <aside class="sidebar" id="sidebar">
+    <a class="brand" href="/dashboard">
+      <span class="brand-mark">
+        <svg viewBox="0 0 24 24" width="22" height="22" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><path d="M10.5 20.5a5 5 0 0 1-7-7l9-9a5 5 0 0 1 7 7z"/><path d="m8.5 8.5 7 7"/></svg>
+      </span>
+      <span class="brand-name">{{ app_name }}<small>Farmacia hospitalaria</small></span>
+    </a>
+    {% set p = request.url.path %}
+    <nav class="nav" aria-label="Principal">
+      <a href="/dashboard" class="{{ 'active' if p.startswith('/dashboard') }}">
+        <svg viewBox="0 0 24 24" width="18" height="18" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="3" width="7" height="9" rx="1.5"/><rect x="14" y="3" width="7" height="5" rx="1.5"/><rect x="14" y="12" width="7" height="9" rx="1.5"/><rect x="3" y="16" width="7" height="5" rx="1.5"/></svg>Reportes</a>
+      <a href="/consulta" class="{{ 'active' if p.startswith('/consulta') }}">
+        <svg viewBox="0 0 24 24" width="18" height="18" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="11" cy="11" r="7"/><path d="m21 21-4.3-4.3"/></svg>Consulta</a>
+      <a href="/inventario" class="{{ 'active' if p.startswith('/inventario') }}">
+        <svg viewBox="0 0 24 24" width="18" height="18" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M21 8 12 3 3 8v8l9 5 9-5z"/><path d="m3 8 9 5 9-5M12 13v8"/></svg>Inventario</a>
+      {% if user.rol == 'Admin' %}
+      <a href="/usuarios" class="{{ 'active' if p.startswith('/usuarios') }}">
+        <svg viewBox="0 0 24 24" width="18" height="18" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M16 21v-2a4 4 0 0 0-4-4H6a4 4 0 0 0-4 4v2"/><circle cx="9" cy="7" r="4"/><path d="M22 21v-2a4 4 0 0 0-3-3.9M16 3.1a4 4 0 0 1 0 7.8"/></svg>Usuarios</a>
+      {% endif %}
+    </nav>
+    <div class="sidebar-foot">
+      <div class="who">
+        <span class="avatar">{{ user.nombre[:1]|upper }}</span>
+        <span class="who-text"><strong>{{ user.nombre }}</strong><small>{{ user.rol }}</small></span>
+      </div>
+      <form method="post" action="/logout"><button class="btn btn-ghost-light btn-block" type="submit">Cerrar sesión</button></form>
+    </div>
+  </aside>
+
+  <div class="main">
+    <header class="topbar">
+      <button class="menu-btn" id="menuBtn" aria-label="Abrir menú" type="button">☰</button>
+      <div class="topbar-title">
+        <h1>{% block heading %}{% endblock %}</h1>
+        <p>{% block subheading %}{% endblock %}</p>
+      </div>
+      <div class="topbar-actions">{% block actions %}{% endblock %}</div>
+    </header>
+    <main class="content">
+      {{ flash(msg, msg_tipo) }}
+      {% block content %}{% endblock %}
+    </main>
+  </div>
+</div>
+{% endblock %}

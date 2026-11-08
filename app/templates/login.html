@@ -1,0 +1,32 @@
+{% extends "base.html" %}
+{% from "_macros.html" import flash %}
+{% block title %}Iniciar sesión{% endblock %}
+{% block bodyclass %}auth{% endblock %}
+{% block body %}
+<div class="auth-bg" aria-hidden="true"><span class="blob b1"></span><span class="blob b2"></span><span class="blob b3"></span></div>
+<main class="auth-card">
+  <div class="auth-brand">
+    <span class="brand-mark lg">
+      <svg viewBox="0 0 24 24" width="28" height="28" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><path d="M10.5 20.5a5 5 0 0 1-7-7l9-9a5 5 0 0 1 7 7z"/><path d="m8.5 8.5 7 7"/></svg>
+    </span>
+    <h1>{{ app_name }}</h1>
+    <p>Control de inventario farmacéutico hospitalario</p>
+  </div>
+
+  {{ flash(msg, msg_tipo) }}
+  {% if error %}<div class="flash flash-error" role="alert"><span>{{ error }}</span></div>{% endif %}
+
+  <form method="post" action="/login" class="form" autocomplete="on">
+    <label class="field">
+      <span>Usuario</span>
+      <input id="usuario" name="usuario" type="text" value="{{ usuario or '' }}" required autofocus autocomplete="username" maxlength="32">
+    </label>
+    <label class="field">
+      <span>Contraseña</span>
+      <input id="password" name="password" type="password" required autocomplete="current-password" maxlength="128">
+    </label>
+    <button id="btn-login" class="btn btn-primary btn-block btn-lg" type="submit">Entrar</button>
+  </form>
+  <p class="auth-alt">¿Eres personal nuevo? <a href="/registro">Solicitar una cuenta</a></p>
+</main>
+{% endblock %}

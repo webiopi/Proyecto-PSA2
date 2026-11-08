@@ -1,0 +1,58 @@
+{% extends "layout.html" %}
+{% from "_macros.html" import errores_lista %}
+{% block title %}Usuarios{% endblock %}
+{% block heading %}Administración de usuarios{% endblock %}
+{% block subheading %}Aprueba solicitudes y gestiona las cuentas del personal{% endblock %}
+{% block content %}
+{% set pendientes = usuarios|rejectattr('aprobado')|list %}
+{% if pendientes %}
+<div class="flash flash-warn" role="status"><span>🔔 Hay <strong>{{ pendientes|length }}</strong> solicitud{{ '' if pendientes|length == 1 else 'es' }} de cuenta pendiente{{ '' if pendientes|length == 1 else 's' }} de aprobación.</span></div>
+{% endif %}
+
+<section class="card flush">
+  <div class="table-wrap">
+  <table class="table">
+    <thead><tr><th>Nombre</th><th>Usuario</th><th>Rol</th><th>Estado</th><th>Alta</th><th class="actions-col">Acciones</th></tr></thead>
+    <tbody>
+    {% for u in usuarios %}
+      <tr class="{{ '' if u.aprobado else 'row-pending' }}">
+        <td data-label="Nombre"><strong>{{ u.nombre }}</strong>{% if u.id == user.id %} <span class="tag">tú</span>{% endif %}</td>
+        <td data-label="Usuario"><code>{{ u.usuario }}</code></td>
+        <td data-label="Rol"><span class="badge badge-role">{{ u.rol }}</span></td>
+        <td data-label="Estado">{% if u.aprobado %}<span class="badge badge-ok">Activo</span>{% else %}<span class="badge badge-over">Pendiente</span>{% endif %}</td>
+        <td data-label="Alta" class="muted">{{ u.creado_en.strftime('%d/%m/%Y') }}</td>
+        <td class="actions-col">
+          {% if not u.aprobado %}
+          <form method="post" action="/usuarios/{{ u.id }}/aprobar" class="inline"><button class="btn btn-sm btn-success" type="submit">Aprobar</button></form>
+          {% elif u.id != user.id %}
+          <form method="post" action="/usuarios/{{ u.id }}/suspender" class="inline" data-confirm="¿Suspender la cuenta de {{ u.usuario }}?"><button class="btn btn-sm btn-ghost" type="submit">Suspender</button></form>
+          {% endif %}
+          {% if u.id != user.id %}
+          <form method="post" action="/usuarios/{{ u.id }}/eliminar" class="inline" data-confirm="¿Eliminar definitivamente la cuenta de {{ u.usuario }}?"><button class="btn btn-sm btn-danger-ghost" type="submit">Eliminar</button></form>
+          {% endif %}
+        </td>
+      </tr>
+    {% endfor %}
+    </tbody>
+  </table>
+  </div>
+</section>
+
+<section class="card form-card">
+  <header class="card-head"><h2>Crear cuenta</h2></header>
+  {{ errores_lista(errores) }}
+  <form method="post" action="/usuarios/crear" class="form" id="form-crear">
+    <div class="grid-2">
+      <label class="field"><span>Nombre completo</span>
+        <input id="c-nombre" name="nombre" type="text" value="{{ valores.nombre or '' }}" required maxlength="100"></label>
+      <label class="field"><span>Usuario</span>
+        <input id="c-usuario" name="usuario" type="text" value="{{ valores.usuario or '' }}" required minlength="3" maxlength="32" pattern="[A-Za-z0-9_.\-]+"></label>
+      <label class="field"><span>Contraseña inicial</span>
+        <input id="c-password" name="password" type="password" required minlength="8" maxlength="128" autocomplete="new-password"></label>
+      <label class="field"><span>Rol</span>
+        <select id="c-rol" name="rol">{% for r in roles %}<option value="{{ r }}" {{ 'selected' if valores.rol == r }}>{{ r }}</option>{% endfor %}</select></label>
+    </div>
+    <div class="form-actions"><button class="btn btn-primary" id="btn-crear-usuario" type="submit">Crear usuario</button></div>
+  </form>
+</section>
+{% endblock %}

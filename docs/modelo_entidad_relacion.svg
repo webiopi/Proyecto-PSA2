@@ -1,0 +1,480 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1660 1140" width="1660" height="1140">
+  <defs>
+    <style>
+      @import url('https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&amp;display=swap');
+      text { font-family: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif; }
+      .bg { fill: #0b1120; }
+      .grid-pattern { stroke: #1e293b; stroke-width: 1; stroke-opacity: 0.4; }
+      .title { font-size: 28px; font-weight: 800; fill: #f8fafc; letter-spacing: -0.5px; }
+      .subtitle { font-size: 14px; font-weight: 500; fill: #94a3b8; }
+      .badge-sys { font-size: 12px; font-weight: 600; fill: #38bdf8; }
+      
+      /* Card styles */
+      .card-bg { fill: #131c2e; stroke: #334155; stroke-width: 1.5; rx: 12px; filter: drop-shadow(0 12px 20px rgba(0, 0, 0, 0.45)); }
+      .table-title { font-size: 17px; font-weight: 700; fill: #ffffff; }
+      .table-desc { font-size: 11px; font-weight: 500; fill: rgba(255, 255, 255, 0.75); }
+      
+      /* Table row styles */
+      .row-bg-even { fill: #131c2e; }
+      .row-bg-odd { fill: #162236; }
+      .col-name { font-size: 13px; font-weight: 600; fill: #f1f5f9; }
+      .col-name-pk { font-size: 13px; font-weight: 700; fill: #fbbf24; }
+      .col-name-fk { font-size: 13px; font-weight: 700; fill: #38bdf8; }
+      .col-type { font-size: 12px; font-weight: 500; fill: #94a3b8; font-family: 'Consolas', 'Courier New', monospace; }
+      .col-extra { font-size: 11px; font-weight: 500; fill: #64748b; }
+      
+      /* Badges */
+      .badge-pk-bg { fill: #b45309; rx: 4px; }
+      .badge-pk-text { font-size: 10px; font-weight: 800; fill: #fef3c7; }
+      .badge-fk-bg { fill: #0369a1; rx: 4px; }
+      .badge-fk-text { font-size: 10px; font-weight: 800; fill: #e0f2fe; }
+      .badge-uk-bg { fill: #7e22ce; rx: 4px; }
+      .badge-uk-text { font-size: 10px; font-weight: 800; fill: #f3e8ff; }
+      .badge-ck-bg { fill: #c2410c; rx: 4px; }
+      .badge-ck-text { font-size: 10px; font-weight: 800; fill: #ffedd5; }
+      
+      /* Section and constraints */
+      .constraint-title { font-size: 11px; font-weight: 700; fill: #94a3b8; text-transform: uppercase; letter-spacing: 0.5px; }
+      .constraint-text { font-size: 11px; font-weight: 500; fill: #cbd5e1; font-family: 'Consolas', 'Courier New', monospace; }
+      
+      /* Relations */
+      .rel-line-solid { fill: none; stroke-width: 2.5; stroke-linecap: round; stroke-linejoin: round; }
+      .rel-line-dashed { fill: none; stroke-width: 2.5; stroke-dasharray: 6 4; stroke-linecap: round; stroke-linejoin: round; }
+      .rel-badge-bg { fill: #131c2e; stroke-width: 1.5; rx: 6px; }
+      .rel-badge-text { font-size: 11px; font-weight: 700; }
+      .rel-cardinality { font-size: 12px; font-weight: 800; }
+    </style>
+    
+    <pattern id="dot-grid" x="0" y="0" width="24" height="24" patternUnits="userSpaceOnUse">
+      <circle cx="2" cy="2" r="1.2" fill="#334155" fill-opacity="0.35"/>
+    </pattern>
+
+    <!-- Header Gradients -->
+    <linearGradient id="grad-usuarios" x1="0%" y1="0%" x2="100%" y2="0%">
+      <stop offset="0%" stop-color="#1d4ed8"/>
+      <stop offset="100%" stop-color="#3b82f6"/>
+    </linearGradient>
+    <linearGradient id="grad-medicamentos" x1="0%" y1="0%" x2="100%" y2="0%">
+      <stop offset="0%" stop-color="#047857"/>
+      <stop offset="100%" stop-color="#10b981"/>
+    </linearGradient>
+    <linearGradient id="grad-ordenes" x1="0%" y1="0%" x2="100%" y2="0%">
+      <stop offset="0%" stop-color="#6d28d9"/>
+      <stop offset="100%" stop-color="#8b5cf6"/>
+    </linearGradient>
+    <linearGradient id="grad-items" x1="0%" y1="0%" x2="100%" y2="0%">
+      <stop offset="0%" stop-color="#be185d"/>
+      <stop offset="100%" stop-color="#ec4899"/>
+    </linearGradient>
+
+    <!-- Arrow markers -->
+    <marker id="arrow-blue" viewBox="0 0 10 10" refX="6" refY="5" markerWidth="6" markerHeight="6" orient="auto-start-reverse">
+      <path d="M 0 1.5 L 9 5 L 0 8.5 z" fill="#38bdf8"/>
+    </marker>
+    <marker id="arrow-purple" viewBox="0 0 10 10" refX="6" refY="5" markerWidth="6" markerHeight="6" orient="auto-start-reverse">
+      <path d="M 0 1.5 L 9 5 L 0 8.5 z" fill="#a78bfa"/>
+    </marker>
+    <marker id="arrow-pink" viewBox="0 0 10 10" refX="6" refY="5" markerWidth="6" markerHeight="6" orient="auto-start-reverse">
+      <path d="M 0 1.5 L 9 5 L 0 8.5 z" fill="#f472b6"/>
+    </marker>
+    <marker id="arrow-emerald" viewBox="0 0 10 10" refX="6" refY="5" markerWidth="6" markerHeight="6" orient="auto-start-reverse">
+      <path d="M 0 1.5 L 9 5 L 0 8.5 z" fill="#34d399"/>
+    </marker>
+  </defs>
+
+  <!-- Background -->
+  <rect width="100%" height="100%" class="bg" />
+  <rect width="100%" height="100%" fill="url(#dot-grid)" />
+
+  <!-- HEADER -->
+  <g transform="translate(80, 42)">
+    <rect x="0" y="0" width="52" height="52" rx="12" fill="#1e293b" stroke="#38bdf8" stroke-width="2"/>
+    <path d="M 16 26 L 36 26 M 26 16 L 26 36" stroke="#38bdf8" stroke-width="3.5" stroke-linecap="round"/>
+    
+    <text x="68" y="27" class="title">SIFARH · Modelo Entidad - Relación (DER)</text>
+    <text x="68" y="47" class="subtitle">Base de datos relacional (SQLite 3 · SQLAlchemy 2.0 ORM) — 4 Tablas, 4 Relaciones con Claves Foráneas</text>
+    
+    <rect x="1320" y="8" width="180" height="36" rx="18" fill="#1e293b" stroke="#334155" stroke-width="1.5"/>
+    <circle cx="1338" cy="26" r="5" fill="#10b981"/>
+    <text x="1352" y="30" class="badge-sys">Sistema Hospitalario</text>
+  </g>
+
+  <!-- ======================================================== -->
+  <!-- RELATIONSHIP LINES                                       -->
+  <!-- ======================================================== -->
+
+  <!-- Rel 1: usuarios -> ordenes_compra (medico_id) [1:N] -->
+  <g>
+    <path d="M 230 496 L 230 588" class="rel-line-solid" stroke="#38bdf8" marker-end="url(#arrow-blue)"/>
+    <circle cx="230" cy="496" r="4.5" fill="#38bdf8"/>
+    
+    <text x="212" y="514" class="rel-cardinality" fill="#38bdf8">1</text>
+    <text x="212" y="580" class="rel-cardinality" fill="#38bdf8">N</text>
+    
+    <rect x="150" y="528" width="160" height="28" class="rel-badge-bg" stroke="#38bdf8"/>
+    <text x="230" y="546" class="rel-badge-text" fill="#38bdf8" text-anchor="middle">1 : N (medico_id)</text>
+  </g>
+
+  <!-- Rel 2: usuarios -> ordenes_compra (resuelto_por_id) [0..1:N] -->
+  <g>
+    <path d="M 480 496 L 480 588" class="rel-line-dashed" stroke="#a78bfa" marker-end="url(#arrow-purple)"/>
+    <circle cx="480" cy="496" r="4.5" fill="#a78bfa"/>
+    
+    <text x="492" y="514" class="rel-cardinality" fill="#a78bfa">0..1</text>
+    <text x="492" y="580" class="rel-cardinality" fill="#a78bfa">N</text>
+    
+    <rect x="385" y="528" width="190" height="28" class="rel-badge-bg" stroke="#a78bfa"/>
+    <text x="480" y="546" class="rel-badge-text" fill="#a78bfa" text-anchor="middle">0..1 : N (resuelto_por_id)</text>
+  </g>
+
+  <!-- Rel 3: ordenes_compra (id) -> orden_items (orden_id) [1:N CASCADE] -->
+  <g>
+    <!-- Stepped path: Starts at right of ordenes_compra at row 'id' (Y=664), steps down to row 'orden_id' (Y=742) in orden_items -->
+    <path d="M 720 664 L 810 664 L 810 742 L 918 742" class="rel-line-solid" stroke="#f472b6" marker-end="url(#arrow-pink)"/>
+    <circle cx="720" cy="664" r="4.5" fill="#f472b6"/>
+    
+    <text x="732" y="654" class="rel-cardinality" fill="#f472b6">1</text>
+    <text x="900" y="732" class="rel-cardinality" fill="#f472b6">N</text>
+    
+    <rect x="730" y="688" width="160" height="28" class="rel-badge-bg" stroke="#f472b6"/>
+    <text x="810" y="706" class="rel-badge-text" fill="#f472b6" text-anchor="middle">1 : N (orden_id)</text>
+  </g>
+
+  <!-- Rel 4: medicamentos (id) -> orden_items (medicamento_id) [1:N] -->
+  <g>
+    <path d="M 1240 560 L 1240 628" class="rel-line-solid" stroke="#34d399" marker-end="url(#arrow-emerald)"/>
+    <circle cx="1240" cy="560" r="4.5" fill="#34d399"/>
+    
+    <text x="1222" y="580" class="rel-cardinality" fill="#34d399">1</text>
+    <text x="1222" y="620" class="rel-cardinality" fill="#34d399">N</text>
+    
+    <rect x="1140" y="580" width="200" height="28" class="rel-badge-bg" stroke="#34d399"/>
+    <text x="1240" y="598" class="rel-badge-text" fill="#34d399" text-anchor="middle">1 : N (medicamento_id)</text>
+  </g>
+
+  <!-- ======================================================== -->
+  <!-- TABLE 1: usuarios (Top Left)                             -->
+  <!-- ======================================================== -->
+  <g transform="translate(80, 140)">
+    <rect width="640" height="355" class="card-bg" />
+    
+    <!-- Card Header -->
+    <path d="M 0 12 Q 0 0 12 0 L 628 0 Q 640 0 640 12 L 640 54 L 0 54 Z" fill="url(#grad-usuarios)" />
+    <circle cx="28" cy="27" r="14" fill="rgba(255,255,255,0.2)"/>
+    <path d="M 28 20 A 4 4 0 1 0 28 28 A 4 4 0 1 0 28 20 M 21 34 C 21 30 25 29 28 29 C 31 29 35 30 35 34" stroke="#ffffff" stroke-width="2" fill="none" stroke-linecap="round"/>
+    <text x="52" y="27" class="table-title">usuarios</text>
+    <text x="52" y="44" class="table-desc">Personal médico, farmacéutico y administrativo con acceso al sistema</text>
+    
+    <!-- Row 1: id -->
+    <rect x="1" y="54" width="638" height="38" class="row-bg-even"/>
+    <rect x="14" y="64" width="28" height="18" class="badge-pk-bg"/>
+    <text x="28" y="77" class="badge-pk-text" text-anchor="middle">PK</text>
+    <text x="52" y="78" class="col-name-pk">id</text>
+    <text x="205" y="78" class="col-type">INTEGER</text>
+    <text x="410" y="78" class="col-extra">Autoincrement · Primary Key</text>
+    <line x1="14" y1="92" x2="626" y2="92" stroke="#1e293b" stroke-width="1"/>
+
+    <!-- Row 2: nombre -->
+    <rect x="1" y="93" width="638" height="36" class="row-bg-odd"/>
+    <text x="52" y="116" class="col-name">nombre</text>
+    <text x="205" y="116" class="col-type">VARCHAR(100)</text>
+    <text x="410" y="116" class="col-extra">NOT NULL</text>
+    <line x1="14" y1="129" x2="626" y2="129" stroke="#1e293b" stroke-width="1"/>
+
+    <!-- Row 3: usuario -->
+    <rect x="1" y="130" width="638" height="36" class="row-bg-even"/>
+    <rect x="14" y="139" width="28" height="18" class="badge-uk-bg"/>
+    <text x="28" y="152" class="badge-uk-text" text-anchor="middle">UK</text>
+    <text x="52" y="153" class="col-name">usuario</text>
+    <text x="205" y="153" class="col-type">VARCHAR(32)</text>
+    <text x="410" y="153" class="col-extra">UNIQUE · INDEX (Login)</text>
+    <line x1="14" y1="166" x2="626" y2="166" stroke="#1e293b" stroke-width="1"/>
+
+    <!-- Row 4: rol -->
+    <rect x="1" y="167" width="638" height="36" class="row-bg-odd"/>
+    <text x="52" y="190" class="col-name">rol</text>
+    <text x="205" y="190" class="col-type">VARCHAR(20)</text>
+    <text x="410" y="190" class="col-extra">Admin | Farmacéutico | Médico</text>
+    <line x1="14" y1="203" x2="626" y2="203" stroke="#1e293b" stroke-width="1"/>
+
+    <!-- Row 5: password_hash -->
+    <rect x="1" y="204" width="638" height="36" class="row-bg-even"/>
+    <text x="52" y="227" class="col-name">password_hash</text>
+    <text x="205" y="227" class="col-type">VARCHAR(255)</text>
+    <text x="410" y="227" class="col-extra">PBKDF2 / SHA256</text>
+    <line x1="14" y1="240" x2="626" y2="240" stroke="#1e293b" stroke-width="1"/>
+
+    <!-- Row 6: aprobado -->
+    <rect x="1" y="241" width="638" height="36" class="row-bg-odd"/>
+    <text x="52" y="264" class="col-name">aprobado</text>
+    <text x="205" y="264" class="col-type">BOOLEAN</text>
+    <text x="410" y="264" class="col-extra">DEFAULT False (Req. Admin)</text>
+    <line x1="14" y1="277" x2="626" y2="277" stroke="#1e293b" stroke-width="1"/>
+
+    <!-- Row 7: creado_en -->
+    <rect x="1" y="278" width="638" height="36" class="row-bg-even"/>
+    <text x="52" y="301" class="col-name">creado_en</text>
+    <text x="205" y="301" class="col-type">DATETIME</text>
+    <text x="410" y="301" class="col-extra">DEFAULT utcnow()</text>
+
+    <!-- Table Footer Note -->
+    <rect x="1" y="318" width="638" height="35" fill="#0f172a" rx="11"/>
+    <text x="16" y="340" class="constraint-title">REGLA NEGOCIO:</text>
+    <text x="128" y="340" class="constraint-text">Primer usuario registrado adquiere rol Admin automáticamente</text>
+  </g>
+
+  <!-- ======================================================== -->
+  <!-- TABLE 2: medicamentos (Top Right)                        -->
+  <!-- ======================================================== -->
+  <g transform="translate(920, 140)">
+    <rect width="660" height="420" class="card-bg" />
+    
+    <!-- Card Header -->
+    <path d="M 0 12 Q 0 0 12 0 L 648 0 Q 660 0 660 12 L 660 54 L 0 54 Z" fill="url(#grad-medicamentos)" />
+    <circle cx="28" cy="27" r="14" fill="rgba(255,255,255,0.2)"/>
+    <path d="M 22 22 L 34 32 M 30 20 L 35 24 L 27 34 L 22 30 Z" stroke="#ffffff" stroke-width="2" fill="none" stroke-linecap="round"/>
+    <text x="52" y="27" class="table-title">medicamentos</text>
+    <text x="52" y="44" class="table-desc">Catálogo farmacéutico, trazabilidad de lotes, caducidad y existencias</text>
+    
+    <!-- Row 1: id -->
+    <rect x="1" y="54" width="658" height="34" class="row-bg-even"/>
+    <rect x="14" y="62" width="28" height="18" class="badge-pk-bg"/>
+    <text x="28" y="75" class="badge-pk-text" text-anchor="middle">PK</text>
+    <text x="52" y="76" class="col-name-pk">id</text>
+    <text x="205" y="76" class="col-type">INTEGER</text>
+    <text x="415" y="76" class="col-extra">Autoincrement · Primary Key</text>
+    <line x1="14" y1="88" x2="646" y2="88" stroke="#1e293b" stroke-width="1"/>
+
+    <!-- Row 2: nombre -->
+    <rect x="1" y="89" width="658" height="33" class="row-bg-odd"/>
+    <text x="52" y="111" class="col-name">nombre</text>
+    <text x="205" y="111" class="col-type">VARCHAR(150)</text>
+    <text x="415" y="111" class="col-extra">INDEX · Nombre comercial</text>
+    <line x1="14" y1="122" x2="646" y2="122" stroke="#1e293b" stroke-width="1"/>
+
+    <!-- Row 3: principio_activo -->
+    <rect x="1" y="123" width="658" height="33" class="row-bg-even"/>
+    <text x="52" y="145" class="col-name">principio_activo</text>
+    <text x="205" y="145" class="col-type">VARCHAR(150)</text>
+    <text x="415" y="145" class="col-extra">INDEX · Denominación genérica</text>
+    <line x1="14" y1="156" x2="646" y2="156" stroke="#1e293b" stroke-width="1"/>
+
+    <!-- Row 4: lote -->
+    <rect x="1" y="157" width="658" height="33" class="row-bg-odd"/>
+    <rect x="14" y="165" width="28" height="18" class="badge-uk-bg"/>
+    <text x="28" y="178" class="badge-uk-text" text-anchor="middle">UK*</text>
+    <text x="52" y="179" class="col-name">lote</text>
+    <text x="205" y="179" class="col-type">VARCHAR(50)</text>
+    <text x="415" y="179" class="col-extra">INDEX · Código de partida</text>
+    <line x1="14" y1="190" x2="646" y2="190" stroke="#1e293b" stroke-width="1"/>
+
+    <!-- Row 5: fecha_caducidad -->
+    <rect x="1" y="191" width="658" height="33" class="row-bg-even"/>
+    <text x="52" y="213" class="col-name">fecha_caducidad</text>
+    <text x="205" y="213" class="col-type">DATE</text>
+    <text x="415" y="213" class="col-extra">INDEX · Alerta si ≤ 90 días</text>
+    <line x1="14" y1="224" x2="646" y2="224" stroke="#1e293b" stroke-width="1"/>
+
+    <!-- Row 6: stock_actual -->
+    <rect x="1" y="225" width="658" height="33" class="row-bg-odd"/>
+    <rect x="14" y="233" width="28" height="18" class="badge-ck-bg"/>
+    <text x="28" y="246" class="badge-ck-text" text-anchor="middle">CK</text>
+    <text x="52" y="247" class="col-name">stock_actual</text>
+    <text x="205" y="247" class="col-type">INTEGER</text>
+    <text x="415" y="247" class="col-extra">DEFAULT 0 (stock_actual ≥ 0)</text>
+    <line x1="14" y1="258" x2="646" y2="258" stroke="#1e293b" stroke-width="1"/>
+
+    <!-- Row 7: stock_minimo -->
+    <rect x="1" y="259" width="658" height="33" class="row-bg-even"/>
+    <rect x="14" y="267" width="28" height="18" class="badge-ck-bg"/>
+    <text x="28" y="280" class="badge-ck-text" text-anchor="middle">CK</text>
+    <text x="52" y="281" class="col-name">stock_minimo</text>
+    <text x="205" y="281" class="col-type">INTEGER</text>
+    <text x="415" y="281" class="col-extra">DEFAULT 0 (stock_minimo ≥ 0)</text>
+    <line x1="14" y1="292" x2="646" y2="292" stroke="#1e293b" stroke-width="1"/>
+
+    <!-- Row 8: stock_maximo -->
+    <rect x="1" y="293" width="658" height="33" class="row-bg-odd"/>
+    <rect x="14" y="301" width="28" height="18" class="badge-ck-bg"/>
+    <text x="28" y="314" class="badge-ck-text" text-anchor="middle">CK</text>
+    <text x="52" y="315" class="col-name">stock_maximo</text>
+    <text x="205" y="315" class="col-type">INTEGER</text>
+    <text x="415" y="315" class="col-extra">DEFAULT 0 (stock_max ≥ stock_min)</text>
+
+    <!-- Table Constraints Footer -->
+    <rect x="1" y="331" width="658" height="87" fill="#0f172a" rx="11"/>
+    <text x="16" y="352" class="constraint-title">RESTRICCIONES Y CONSTRAINTS:</text>
+    <text x="16" y="372" class="constraint-text">• UNIQUE(nombre, lote) → uq_medicamento_nombre_lote</text>
+    <text x="16" y="391" class="constraint-text">• CHECK(stock_actual ≥ 0) · CHECK(stock_minimo ≥ 0)</text>
+    <text x="16" y="410" class="constraint-text">• CHECK(stock_maximo ≥ stock_minimo) → ck_stock_rango</text>
+  </g>
+
+  <!-- ======================================================== -->
+  <!-- TABLE 3: ordenes_compra (Bottom Left)                     -->
+  <!-- ======================================================== -->
+  <g transform="translate(80, 590)">
+    <rect width="640" height="355" class="card-bg" />
+    
+    <!-- Card Header -->
+    <path d="M 0 12 Q 0 0 12 0 L 628 0 Q 640 0 640 12 L 640 54 L 0 54 Z" fill="url(#grad-ordenes)" />
+    <circle cx="28" cy="27" r="14" fill="rgba(255,255,255,0.2)"/>
+    <path d="M 22 20 L 34 20 L 34 34 L 22 34 Z M 25 24 L 31 24 M 25 28 L 31 28" stroke="#ffffff" stroke-width="2" fill="none" stroke-linecap="round"/>
+    <text x="52" y="27" class="table-title">ordenes_compra</text>
+    <text x="52" y="44" class="table-desc">Solicitud de medicamentos por médicos; resueltas por farmacéuticos</text>
+    
+    <!-- Row 1: id -->
+    <rect x="1" y="54" width="638" height="38" class="row-bg-even"/>
+    <rect x="14" y="64" width="28" height="18" class="badge-pk-bg"/>
+    <text x="28" y="77" class="badge-pk-text" text-anchor="middle">PK</text>
+    <text x="52" y="78" class="col-name-pk">id</text>
+    <text x="205" y="78" class="col-type">INTEGER</text>
+    <text x="410" y="78" class="col-extra">Autoincrement · Primary Key</text>
+    <line x1="14" y1="92" x2="626" y2="92" stroke="#1e293b" stroke-width="1"/>
+
+    <!-- Row 2: medico_id -->
+    <rect x="1" y="93" width="638" height="36" class="row-bg-odd"/>
+    <rect x="14" y="102" width="28" height="18" class="badge-fk-bg"/>
+    <text x="28" y="115" class="badge-fk-text" text-anchor="middle">FK</text>
+    <text x="52" y="116" class="col-name-fk">medico_id</text>
+    <text x="205" y="116" class="col-type">INTEGER</text>
+    <text x="410" y="116" class="col-extra">FK → usuarios.id (INDEX)</text>
+    <line x1="14" y1="129" x2="626" y2="129" stroke="#1e293b" stroke-width="1"/>
+
+    <!-- Row 3: estado -->
+    <rect x="1" y="130" width="638" height="36" class="row-bg-even"/>
+    <text x="52" y="153" class="col-name">estado</text>
+    <text x="205" y="153" class="col-type">VARCHAR(20)</text>
+    <text x="410" y="153" class="col-extra">Pendiente | Confirmada | Rechazada</text>
+    <line x1="14" y1="166" x2="626" y2="166" stroke="#1e293b" stroke-width="1"/>
+
+    <!-- Row 4: notas -->
+    <rect x="1" y="167" width="638" height="36" class="row-bg-odd"/>
+    <text x="52" y="190" class="col-name">notas</text>
+    <text x="205" y="190" class="col-type">VARCHAR(300)</text>
+    <text x="410" y="190" class="col-extra">DEFAULT "" (Observaciones)</text>
+    <line x1="14" y1="203" x2="626" y2="203" stroke="#1e293b" stroke-width="1"/>
+
+    <!-- Row 5: creado_en -->
+    <rect x="1" y="204" width="638" height="36" class="row-bg-even"/>
+    <text x="52" y="227" class="col-name">creado_en</text>
+    <text x="205" y="227" class="col-type">DATETIME</text>
+    <text x="410" y="227" class="col-extra">DEFAULT utcnow()</text>
+    <line x1="14" y1="240" x2="626" y2="240" stroke="#1e293b" stroke-width="1"/>
+
+    <!-- Row 6: resuelto_por_id -->
+    <rect x="1" y="241" width="638" height="36" class="row-bg-odd"/>
+    <rect x="14" y="250" width="28" height="18" class="badge-fk-bg"/>
+    <text x="28" y="263" class="badge-fk-text" text-anchor="middle">FK</text>
+    <text x="52" y="264" class="col-name-fk">resuelto_por_id</text>
+    <text x="205" y="264" class="col-type">INTEGER (NULL)</text>
+    <text x="410" y="264" class="col-extra">FK → usuarios.id (Nullable)</text>
+    <line x1="14" y1="277" x2="626" y2="277" stroke="#1e293b" stroke-width="1"/>
+
+    <!-- Row 7: resuelto_en -->
+    <rect x="1" y="278" width="638" height="36" class="row-bg-even"/>
+    <text x="52" y="301" class="col-name">resuelto_en</text>
+    <text x="205" y="301" class="col-type">DATETIME (NULL)</text>
+    <text x="410" y="301" class="col-extra">Fecha/hora de resolución</text>
+
+    <!-- Table Footer Note -->
+    <rect x="1" y="318" width="638" height="35" fill="#0f172a" rx="11"/>
+    <text x="16" y="340" class="constraint-title">REGLA NEGOCIO:</text>
+    <text x="128" y="340" class="constraint-text">Al confirmar orden: rebaja stock_actual en tabla medicamentos</text>
+  </g>
+
+  <!-- ======================================================== -->
+  <!-- TABLE 4: orden_items (Bottom Right)                      -->
+  <!-- ======================================================== -->
+  <g transform="translate(920, 630)">
+    <rect width="660" height="315" class="card-bg" />
+    
+    <!-- Card Header -->
+    <path d="M 0 12 Q 0 0 12 0 L 648 0 Q 660 0 660 12 L 660 54 L 0 54 Z" fill="url(#grad-items)" />
+    <circle cx="28" cy="27" r="14" fill="rgba(255,255,255,0.2)"/>
+    <path d="M 21 27 L 25 31 L 34 22" stroke="#ffffff" stroke-width="2.2" fill="none" stroke-linecap="round"/>
+    <text x="52" y="27" class="table-title">orden_items</text>
+    <text x="52" y="44" class="table-desc">Líneas de detalle del pedido: medicamento solicitado y cantidad unitaria</text>
+    
+    <!-- Row 1: id -->
+    <rect x="1" y="54" width="658" height="38" class="row-bg-even"/>
+    <rect x="14" y="64" width="28" height="18" class="badge-pk-bg"/>
+    <text x="28" y="77" class="badge-pk-text" text-anchor="middle">PK</text>
+    <text x="52" y="78" class="col-name-pk">id</text>
+    <text x="205" y="78" class="col-type">INTEGER</text>
+    <text x="415" y="78" class="col-extra">Autoincrement · Primary Key</text>
+    <line x1="14" y1="92" x2="646" y2="92" stroke="#1e293b" stroke-width="1"/>
+
+    <!-- Row 2: orden_id -->
+    <rect x="1" y="93" width="658" height="38" class="row-bg-odd"/>
+    <rect x="14" y="103" width="28" height="18" class="badge-fk-bg"/>
+    <text x="28" y="116" class="badge-fk-text" text-anchor="middle">FK</text>
+    <text x="52" y="117" class="col-name-fk">orden_id</text>
+    <text x="205" y="117" class="col-type">INTEGER</text>
+    <text x="415" y="117" class="col-extra">FK → ordenes_compra.id (INDEX)</text>
+    <line x1="14" y1="131" x2="646" y2="131" stroke="#1e293b" stroke-width="1"/>
+
+    <!-- Row 3: medicamento_id -->
+    <rect x="1" y="132" width="658" height="38" class="row-bg-even"/>
+    <rect x="14" y="142" width="28" height="18" class="badge-fk-bg"/>
+    <text x="28" y="155" class="badge-fk-text" text-anchor="middle">FK</text>
+    <text x="52" y="156" class="col-name-fk">medicamento_id</text>
+    <text x="205" y="156" class="col-type">INTEGER</text>
+    <text x="415" y="156" class="col-extra">FK → medicamentos.id</text>
+    <line x1="14" y1="170" x2="646" y2="170" stroke="#1e293b" stroke-width="1"/>
+
+    <!-- Row 4: cantidad -->
+    <rect x="1" y="171" width="658" height="38" class="row-bg-odd"/>
+    <rect x="14" y="181" width="28" height="18" class="badge-ck-bg"/>
+    <text x="28" y="194" class="badge-ck-text" text-anchor="middle">CK</text>
+    <text x="52" y="195" class="col-name">cantidad</text>
+    <text x="205" y="195" class="col-type">INTEGER</text>
+    <text x="415" y="195" class="col-extra">NOT NULL (CHECK cantidad > 0)</text>
+
+    <!-- Table Constraints Footer -->
+    <rect x="1" y="220" width="658" height="93" fill="#0f172a" rx="11"/>
+    <text x="16" y="244" class="constraint-title">RESTRICCIONES Y CASCADA:</text>
+    <text x="16" y="268" class="constraint-text">• CHECK(cantidad > 0) → ck_item_cantidad</text>
+    <text x="16" y="288" class="constraint-text">• CASCADE: cascade="all, delete-orphan" desde ordenes_compra</text>
+  </g>
+
+  <!-- ======================================================== -->
+  <!-- BOTTOM LEGEND & METADATA BAR                             -->
+  <!-- ======================================================== -->
+  <g transform="translate(80, 990)">
+    <rect width="1500" height="95" rx="12" fill="#131c2e" stroke="#334155" stroke-width="1.5"/>
+    
+    <!-- Badges Legend -->
+    <text x="24" y="32" class="constraint-title">CONVENCIONES DEL DIAGRAMA:</text>
+    
+    <!-- PK -->
+    <rect x="24" y="46" width="30" height="20" class="badge-pk-bg"/>
+    <text x="39" y="60" class="badge-pk-text" text-anchor="middle">PK</text>
+    <text x="62" y="61" class="col-extra" font-weight="600">Llave Primaria</text>
+
+    <!-- FK -->
+    <rect x="180" y="46" width="30" height="20" class="badge-fk-bg"/>
+    <text x="195" y="60" class="badge-fk-text" text-anchor="middle">FK</text>
+    <text x="218" y="61" class="col-extra" font-weight="600">Llave Foránea</text>
+
+    <!-- UK -->
+    <rect x="335" y="46" width="30" height="20" class="badge-uk-bg"/>
+    <text x="350" y="60" class="badge-uk-text" text-anchor="middle">UK</text>
+    <text x="373" y="61" class="col-extra" font-weight="600">Índice / Clave Única</text>
+
+    <!-- CK -->
+    <rect x="540" y="46" width="30" height="20" class="badge-ck-bg"/>
+    <text x="555" y="60" class="badge-ck-text" text-anchor="middle">CK</text>
+    <text x="578" y="61" class="col-extra" font-weight="600">Restricción CHECK</text>
+
+    <line x1="730" y1="20" x2="730" y2="80" stroke="#334155" stroke-width="1"/>
+
+    <!-- Relationships Legend -->
+    <text x="755" y="32" class="constraint-title">CARDINALIDADES Y RELACIONES:</text>
+    
+    <line x1="755" y1="56" x2="795" y2="56" stroke="#38bdf8" stroke-width="2.5"/>
+    <text x="805" y="60" class="col-extra">Línea continua: Relación obligatoria (1 a N)</text>
+
+    <line x1="1120" y1="56" x2="1160" y2="56" stroke="#a78bfa" stroke-width="2.5" stroke-dasharray="5 3"/>
+    <text x="1170" y="60" class="col-extra">Línea discontinua: Relación opcional / nullable (0..1 a N)</text>
+  </g>
+</svg>

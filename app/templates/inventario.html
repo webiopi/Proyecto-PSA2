@@ -1,0 +1,101 @@
+{% extends "layout.html" %}
+{% from "_macros.html" import tabla_meds, pagination, tabla_ordenes, estado_orden, detalle_items %}
+{% block title %}Inventario{% endblock %}
+{% block heading %}Inventario{% endblock %}
+{% block subheading %}Gestión de medicamentos · filas en rojo requieren atención{% endblock %}
+{% block actions %}
+{% if puede_editar %}<a class="btn btn-primary" id="btn-nuevo" href="/inventario/nuevo">＋ Nuevo medicamento</a>{% endif %}
+{% if es_medico %}<button class="btn btn-primary" id="btn-pedido" type="button">🛒 Pedido</button>{% endif %}
+{% endblock %}
+{% block content %}
+{% if puede_editar and ordenes_pendientes %}
+<section class="card flush gap-b" id="ordenes-pendientes">
+  <header class="card-head pad">
+    <div>
+      <h2>🧾 Órdenes de compra pendientes <span class="tag">{{ ordenes_pendientes|length }}</span></h2>
+      <p class="muted">Al confirmar una orden se rebaja el stock de los medicamentos.</p>
+    </div>
+  </header>
+  <div class="table-wrap">
+  <table class="table">
+    <thead><tr><th>Orden</th><th>Fecha</th><th>Médico</th><th>Medicamentos</th><th>Notas</th><th class="actions-col">Acciones</th></tr></thead>
+    <tbody>
+    {% for o in ordenes_pendientes %}
+      <tr>
+        <td data-label="Orden"><strong>#{{ o.id }}</strong></td>
+        <td data-label="Fecha">{{ o.creado_en.strftime('%d/%m/%Y %H:%M') }}</td>
+        <td data-label="Médico">{{ o.medico.nombre }}</td>
+        <td data-label="Medicamentos">{{ detalle_items(o) }}</td>
+        <td data-label="Notas">{{ o.notas or '—' }}</td>
+        <td class="actions-col">
+          <form method="post" action="/ordenes/{{ o.id }}/confirmar" class="inline" data-confirm="¿Confirmar la orden #{{ o.id }}? Se rebajará el stock.">
+            <button class="btn btn-sm btn-success" type="submit" id="btn-confirmar-{{ o.id }}">Confirmar</button>
+          </form>
+          <form method="post" action="/ordenes/{{ o.id }}/rechazar" class="inline" data-confirm="¿Rechazar la orden #{{ o.id }}?">
+            <button class="btn btn-sm btn-danger-ghost" type="submit">Rechazar</button>
+          </form>
+        </td>
+      </tr>
+    {% endfor %}
+    </tbody>
+  </table>
+  </div>
+</section>
+{% endif %}
+
+<section class="card flush">
+  {{ tabla_meds(res["items"], acciones=puede_editar) }}
+  {{ pagination(res, base_qs) }}
+</section>
+<p class="legend">
+  <span class="badge badge-danger">Bajo mínimo / Caduca ≤ {{ dias_alerta }} d / Caducado</span>
+  <span class="badge badge-over">Sobre máximo</span>
+  {% if not puede_editar %}<span class="muted">Tu rol tiene acceso de solo lectura{% if es_medico %}, y puedes solicitar medicamentos con «Pedido»{% endif %}.</span>{% endif %}
+</p>
+
+{% if es_medico %}
+<section class="card flush gap-t" id="mis-pedidos">
+  <header class="card-head pad"><div><h2>🧾 Mis pedidos recientes</h2></div></header>
+  {{ tabla_ordenes(mis_ordenes) }}
+</section>
+
+<div class="modal" id="modal-pedido" hidden>
+  <div class="modal-backdrop" data-close></div>
+  <div class="modal-dialog" role="dialog" aria-modal="true" aria-labelledby="modal-pedido-titulo">
+    <header class="modal-head">
+      <h2 id="modal-pedido-titulo">🛒 Nuevo pedido de medicamentos</h2>
+      <button class="flash-close" type="button" data-close aria-label="Cerrar">×</button>
+    </header>
+    <div class="modal-body">
+      <div class="pedido-grid">
+        <div>
+          <label class="field"><span>Buscar medicamento</span>
+            <input id="ped-buscar" type="search" placeholder="Nombre, principio activo o lote…" autocomplete="off"></label>
+          <ul class="list ped-resultados" id="ped-resultados"></ul>
+
+          <div class="ai-box">
+            <label class="field"><span>✨ Asistente IA <span class="tag">Ollama</span></span>
+              <input id="ped-dolencia" type="text" maxlength="300" placeholder="Describe la dolencia (ej. dolor de cabeza y fiebre)"></label>
+            <button class="btn btn-ghost btn-sm" id="ped-sugerir" type="button">Sugerir medicamentos</button>
+            <div id="ped-ia" class="ai-result" hidden aria-live="polite"></div>
+          </div>
+        </div>
+        <div>
+          <h3 class="ped-sub">Medicamentos del pedido</h3>
+          <ul class="list" id="ped-items"></ul>
+          <p class="empty" id="ped-vacio">Aún no has agregado medicamentos.</p>
+          <label class="field"><span>Notas (opcional)</span>
+            <input id="ped-notas" type="text" maxlength="300" placeholder="Servicio, urgencia, etc."></label>
+          <div id="ped-error" class="flash flash-error" hidden role="alert"></div>
+        </div>
+      </div>
+    </div>
+    <footer class="modal-foot">
+      <button class="btn btn-ghost" type="button" data-close>Cancelar</button>
+      <button class="btn btn-primary" id="ped-enviar" type="button" disabled>Realizar pedido</button>
+    </footer>
+  </div>
+</div>
+<script src="{{ url_for('static', path='js/pedidos.js') }}" defer></script>
+{% endif %}
+{% endblock %}

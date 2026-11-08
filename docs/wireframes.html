@@ -1,0 +1,458 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Wireframes Interactivos · SIFARH</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+  <style>
+    :root {
+      --bg: #0b1120;
+      --card-bg: #131d31;
+      --border: #24344d;
+      --primary: #2563eb;
+      --primary-hover: #1d4ed8;
+      --accent-cyan: #38bdf8;
+      --text: #f8fafc;
+      --text-muted: #94a3b8;
+    }
+    * { box-sizing: border-box; margin: 0; padding: 0; }
+    body {
+      font-family: 'Inter', -apple-system, sans-serif;
+      background: var(--bg);
+      color: var(--text);
+      line-height: 1.5;
+      padding: 30px;
+    }
+    .header {
+      max-width: 1400px;
+      margin: 0 auto 30px;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      border-bottom: 1px solid var(--border);
+      padding-bottom: 20px;
+    }
+    .header h1 { font-size: 26px; font-weight: 800; color: #fff; }
+    .header p { color: var(--text-muted); font-size: 14px; }
+    .badge-pill {
+      background: #1e293b;
+      border: 1px solid var(--border);
+      color: var(--accent-cyan);
+      padding: 6px 16px;
+      border-radius: 20px;
+      font-size: 12px;
+      font-weight: 700;
+    }
+
+    /* Tabs */
+    .tabs-nav {
+      max-width: 1400px;
+      margin: 0 auto 25px;
+      display: flex;
+      gap: 10px;
+      overflow-x: auto;
+      padding-bottom: 6px;
+    }
+    .tab-btn {
+      background: #172338;
+      border: 1px solid var(--border);
+      color: var(--text-muted);
+      padding: 10px 18px;
+      border-radius: 8px;
+      font-size: 13px;
+      font-weight: 600;
+      cursor: pointer;
+      transition: all 0.2s ease;
+      white-space: nowrap;
+    }
+    .tab-btn:hover { background: #1e2e4a; color: #fff; }
+    .tab-btn.active {
+      background: var(--primary);
+      border-color: var(--primary);
+      color: #fff;
+      box-shadow: 0 4px 12px rgba(37,99,235,0.3);
+    }
+
+    /* Container */
+    .container {
+      max-width: 1400px;
+      margin: 0 auto;
+    }
+    .tab-panel { display: none; }
+    .tab-panel.active { display: block; }
+
+    /* Wireframe Preview Card */
+    .wf-window {
+      background: var(--card-bg);
+      border: 1px solid var(--border);
+      border-radius: 12px;
+      box-shadow: 0 20px 35px rgba(0,0,0,0.4);
+      overflow: hidden;
+      margin-bottom: 25px;
+    }
+    .wf-header-bar {
+      background: #1b263c;
+      padding: 12px 20px;
+      display: flex;
+      align-items: center;
+      gap: 8px;
+      border-bottom: 1px solid var(--border);
+    }
+    .dot { width: 11px; height: 11px; border-radius: 50%; display: inline-block; }
+    .dot-red { background: #ef4444; }
+    .dot-yellow { background: #f59e0b; }
+    .dot-green { background: #10b981; }
+    .wf-title { margin-left: 12px; font-size: 13px; font-weight: 700; color: #cbd5e1; }
+
+    .wf-body { padding: 30px; }
+
+    /* Info description */
+    .screen-desc {
+      background: #10192a;
+      border-left: 4px solid var(--accent-cyan);
+      padding: 15px 20px;
+      border-radius: 0 8px 8px 0;
+      margin-bottom: 25px;
+    }
+    .screen-desc h3 { font-size: 16px; margin-bottom: 4px; color: var(--accent-cyan); }
+    .screen-desc p { font-size: 13px; color: var(--text-muted); }
+
+    /* Image zoom container */
+    .img-box {
+      border: 1px solid var(--border);
+      border-radius: 8px;
+      background: #090e1a;
+      text-align: center;
+      padding: 20px;
+    }
+    .img-box img {
+      max-width: 100%;
+      height: auto;
+      border-radius: 6px;
+      box-shadow: 0 8px 20px rgba(0,0,0,0.6);
+      transition: transform 0.2s ease;
+    }
+    .img-box img:hover {
+      transform: scale(1.005);
+    }
+
+    /* Component List */
+    .components-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+      gap: 15px;
+      margin-top: 25px;
+    }
+    .comp-item {
+      background: #0e1626;
+      border: 1px solid var(--border);
+      border-radius: 8px;
+      padding: 14px 18px;
+    }
+    .comp-item h4 { font-size: 13px; font-weight: 700; color: #e2e8f0; margin-bottom: 4px; }
+    .comp-item p { font-size: 12px; color: var(--text-muted); }
+  </style>
+</head>
+<body>
+
+  <div class="header">
+    <div>
+      <h1>SIFARH · Wireframes del Sistema</h1>
+      <p>Visualizador interactivo de arquitectura de interfaces y flujo de navegación hospitalario</p>
+    </div>
+    <div class="badge-pill">7 Pantallas & Wireframes HD Documentados</div>
+  </div>
+
+  <div class="tabs-nav">
+    <button class="tab-btn active" onclick="showTab('vista-global')">🗺 Vista Global (Blueprint)</button>
+    <button class="tab-btn" onclick="showTab('dashboard')">1. Dashboard & Reportes</button>
+    <button class="tab-btn" onclick="showTab('inventario')">2. Inventario & Órdenes</button>
+    <button class="tab-btn" onclick="showTab('modal-pedido')">3. Modal Pedido con IA</button>
+    <button class="tab-btn" onclick="showTab('consulta')">4. Consulta Rápida</button>
+    <button class="tab-btn" onclick="showTab('form-med')">5. Alta de Medicamento</button>
+    <button class="tab-btn" onclick="showTab('usuarios')">6. Usuarios & Aprobación</button>
+    <button class="tab-btn" onclick="showTab('login')">7. Login & Registro</button>
+  </div>
+
+  <div class="container">
+
+    <!-- TAB: VISTA GLOBAL -->
+    <div id="vista-global" class="tab-panel active">
+      <div class="screen-desc">
+        <h3>Mapa Arquitectónico Completo de UI/UX</h3>
+        <p>Blueprint visual de alta resolución con las 6 vistas clave integradas, sus componentes, barras de navegación y flujo de interacción clínico.</p>
+      </div>
+      <div class="wf-window">
+        <div class="wf-header-bar">
+          <span class="dot dot-red"></span><span class="dot dot-yellow"></span><span class="dot dot-green"></span>
+          <span class="wf-title">00_blueprint_completo.png · Resolución 2600 × 1800 px</span>
+        </div>
+        <div class="wf-body">
+          <div class="img-box">
+            <a href="../Wireframes/00_blueprint_completo.png" target="_blank" style="text-decoration:none;">
+              <img src="../Wireframes/00_blueprint_completo.png" alt="Wireframes Completos de SIFARH">
+            </a>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- TAB 1: DASHBOARD -->
+    <div id="dashboard" class="tab-panel">
+      <div class="screen-desc">
+        <h3>1. Dashboard Ejecutivo & Reportería (/dashboard)</h3>
+        <p>Panel principal del sistema. Diseñado con una barra lateral (Sidebar) colapsable, 4 tarjetas métricas con semáforo, 2 columnas de alertas prioritarias y tabla histórica de órdenes.</p>
+      </div>
+      <div class="wf-window">
+        <div class="wf-header-bar">
+          <span class="dot dot-red"></span><span class="dot dot-yellow"></span><span class="dot dot-green"></span>
+          <span class="wf-title">01_dashboard_reportes.png · Wireframe HD (1600 × 1540 px)</span>
+        </div>
+        <div class="wf-body">
+          <div class="img-box">
+            <a href="../Wireframes/01_dashboard_reportes.png" target="_blank">
+              <img src="../Wireframes/01_dashboard_reportes.png" alt="Wireframe Dashboard y Reportes">
+            </a>
+          </div>
+        </div>
+      </div>
+      <div class="components-grid">
+        <div class="comp-item">
+          <h4>Sidebar de Navegación</h4>
+          <p>Logo institucional, enlaces directos (/dashboard, /consulta, /inventario, /usuarios), perfil del usuario autenticado y botón de cierre de sesión.</p>
+        </div>
+        <div class="comp-item">
+          <h4>Tarjetas KPI con Semáforo</h4>
+          <p>Total de medicamentos (Azul), por caducar ≤ 90 días (Ámbar), stock crítico bajo mínimo (Rojo) e indicador Donut de salud del inventario en porcentaje.</p>
+        </div>
+        <div class="comp-item">
+          <h4>Exportación & Botón IA</h4>
+          <p>Menú desplegable para descarga inmediata de CSV (todo, críticos, caducidades, órdenes) y botón para ejecutar análisis predictivo con Ollama.</p>
+        </div>
+        <div class="comp-item">
+          <h4>Listas de Atención Inmediata</h4>
+          <p>Visualización de lotes y días restantes para vencimiento, junto con medicamentos en rotura de stock.</p>
+        </div>
+      </div>
+    </div>
+
+    <!-- TAB 2: INVENTARIO -->
+    <div id="inventario" class="tab-panel">
+      <div class="screen-desc">
+        <h3>2. Gestión de Inventario & Aprobación (/inventario)</h3>
+        <p>Corazón operativo de la farmacia. Permite altas, ediciones, bajas, filtrado por semáforo y confirmación de pedidos médicos pendientes.</p>
+      </div>
+      <div class="wf-window">
+        <div class="wf-header-bar">
+          <span class="dot dot-red"></span><span class="dot dot-yellow"></span><span class="dot dot-green"></span>
+          <span class="wf-title">02_inventario_ordenes.png · Wireframe HD (1600 × 1540 px)</span>
+        </div>
+        <div class="wf-body">
+          <div class="img-box">
+            <a href="../Wireframes/02_inventario_ordenes.png" target="_blank">
+              <img src="../Wireframes/02_inventario_ordenes.png" alt="Wireframe Inventario y Órdenes">
+            </a>
+          </div>
+        </div>
+      </div>
+      <div class="components-grid">
+        <div class="comp-item">
+          <h4>Bandeja de Órdenes Pendientes</h4>
+          <p>Exclusiva para Farmacéuticos/Admins: muestra solicitudes de médicos con botones de acción ("Confirmar" rebaja stock o "Rechazar").</p>
+        </div>
+        <div class="comp-item">
+          <h4>Tabla Maestra de Inventario</h4>
+          <p>Filas con resaltado automático condicional (fondo rojo suave para stock crítico o caducados, ámbar para próximos a caducar).</p>
+        </div>
+        <div class="comp-item">
+          <h4>Acciones Rápidas</h4>
+          <p>Botones de "+ Nuevo medicamento" (Farmacia) y "🛒 Pedido Clínico" (exclusivo médicos) en la cabecera superior.</p>
+        </div>
+      </div>
+    </div>
+
+    <!-- TAB 3: MODAL PEDIDO IA -->
+    <div id="modal-pedido" class="tab-panel">
+      <div class="screen-desc">
+        <h3>3. Modal de Pedido Clínico con Asistente IA (/api/ordenes)</h3>
+        <p>Ventana modal interactiva donde los médicos seleccionan medicamentos en tiempo real o reciben sugerencias clínicas automáticas basadas en la dolencia ingresada.</p>
+      </div>
+      <div class="wf-window">
+        <div class="wf-header-bar">
+          <span class="dot dot-red"></span><span class="dot dot-yellow"></span><span class="dot dot-green"></span>
+          <span class="wf-title">03_modal_pedido_ia.png · Wireframe HD (1600 × 1540 px)</span>
+        </div>
+        <div class="wf-body">
+          <div class="img-box">
+            <a href="../Wireframes/03_modal_pedido_ia.png" target="_blank">
+              <img src="../Wireframes/03_modal_pedido_ia.png" alt="Wireframe Modal Pedido IA">
+            </a>
+          </div>
+        </div>
+      </div>
+      <div class="components-grid">
+        <div class="comp-item">
+          <h4>Buscador Asíncrono en Tiempo Real</h4>
+          <p>Búsqueda predictiva conectada a la API que filtra solo medicamentos con stock físico disponible (> 0).</p>
+        </div>
+        <div class="comp-item">
+          <h4>Caja de Asistente IA (Ollama)</h4>
+          <p>Entrada de texto clínico (ej. "infección respiratoria con fiebre"). La IA consulta el stock local y recomienda posología y medicamentos existentes.</p>
+        </div>
+        <div class="comp-item">
+          <h4>Carrito de Dispensación</h4>
+          <p>Lista dinámica de medicamentos seleccionados con selector numérico de unidades, notas clínicas y botón de confirmación.</p>
+        </div>
+      </div>
+    </div>
+
+    <!-- TAB 4: CONSULTA -->
+    <div id="consulta" class="tab-panel">
+      <div class="screen-desc">
+        <h3>4. Consulta Rápida de Inventario (/consulta)</h3>
+        <p>Vista ultrarrápida diseñada para mostrador y médicos en consulta para verificar disponibilidad inmediata sin opciones de edición.</p>
+      </div>
+      <div class="wf-window">
+        <div class="wf-header-bar">
+          <span class="dot dot-red"></span><span class="dot dot-yellow"></span><span class="dot dot-green"></span>
+          <span class="wf-title">04_consulta_rapida.png · Wireframe HD (1600 × 1540 px)</span>
+        </div>
+        <div class="wf-body">
+          <div class="img-box">
+            <a href="../Wireframes/04_consulta_rapida.png" target="_blank">
+              <img src="../Wireframes/04_consulta_rapida.png" alt="Wireframe Consulta Rápida">
+            </a>
+          </div>
+        </div>
+      </div>
+      <div class="components-grid">
+        <div class="comp-item">
+          <h4>Filtros Multidimensionales</h4>
+          <p>4 campos de filtrado simultáneos: Nombre comercial, Principio activo genérico, Código de lote y selector de estado de alerta.</p>
+        </div>
+        <div class="comp-item">
+          <h4>Badges de Disponibilidad Inmediata</h4>
+          <p>Indicadores en verde (Disponible), ámbar (Próximo a caducar) o rojo (Crítico / No disponible) para lectura visual instantánea.</p>
+        </div>
+      </div>
+    </div>
+
+    <!-- TAB 5: FORMULARIO MEDICAMENTO -->
+    <div id="form-med" class="tab-panel">
+      <div class="screen-desc">
+        <h3>5. Alta y Edición de Medicamento (/inventario/nuevo)</h3>
+        <p>Formulario con validaciones en cliente y servidor para registrar nuevos lotes garantizando la integridad de datos del hospital.</p>
+      </div>
+      <div class="wf-window">
+        <div class="wf-header-bar">
+          <span class="dot dot-red"></span><span class="dot dot-yellow"></span><span class="dot dot-green"></span>
+          <span class="wf-title">05_formulario_medicamento.png · Wireframe HD (1600 × 1540 px)</span>
+        </div>
+        <div class="wf-body">
+          <div class="img-box">
+            <a href="../Wireframes/05_formulario_medicamento.png" target="_blank">
+              <img src="../Wireframes/05_formulario_medicamento.png" alt="Wireframe Alta y Edición Medicamento">
+            </a>
+          </div>
+        </div>
+      </div>
+      <div class="components-grid">
+        <div class="comp-item">
+          <h4>Campos Clínicos y Trazabilidad</h4>
+          <p>Nombre comercial, principio activo, lote único y selector nativo de fecha de caducidad.</p>
+        </div>
+        <div class="comp-item">
+          <h4>Tríada de Umbrales de Stock</h4>
+          <p>Configuración de Stock Actual, Stock Mínimo (umbral crítico) y Stock Máximo (umbral de sobreabastecimiento).</p>
+        </div>
+        <div class="comp-item">
+          <h4>Validaciones Reactivas</h4>
+          <p>Control visual automático que alerta si el stock actual está bajo el mínimo o si la fecha de caducidad está vencida.</p>
+        </div>
+      </div>
+    </div>
+
+    <!-- TAB 6: USUARIOS -->
+    <div id="usuarios" class="tab-panel">
+      <div class="screen-desc">
+        <h3>6. Administración de Usuarios & Acceso (/usuarios)</h3>
+        <p>Control de acceso basado en roles (RBAC) y flujo de auto-registro con aprobación obligatoria por el Administrador.</p>
+      </div>
+      <div class="wf-window">
+        <div class="wf-header-bar">
+          <span class="dot dot-red"></span><span class="dot dot-yellow"></span><span class="dot dot-green"></span>
+          <span class="wf-title">06_usuarios_login.png · Wireframe HD (1600 × 1540 px)</span>
+        </div>
+        <div class="wf-body">
+          <div class="img-box">
+            <a href="../Wireframes/06_usuarios_login.png" target="_blank">
+              <img src="../Wireframes/06_usuarios_login.png" alt="Wireframe Administración de Usuarios">
+            </a>
+          </div>
+        </div>
+      </div>
+      <div class="components-grid">
+        <div class="comp-item">
+          <h4>Bandeja de Aprobaciones</h4>
+          <p>Banner amarillo destacado con contador de médicos/farmacéuticos auto-registrados pendientes de activación.</p>
+        </div>
+        <div class="comp-item">
+          <h4>Tabla de Personal</h4>
+          <p>Listado de cuentas con botones rápidos para "Aprobar", "Suspender" o "Eliminar" definitivamente.</p>
+        </div>
+        <div class="comp-item">
+          <h4>Formulario de Alta Directa</h4>
+          <p>Permite al Administrador registrar personal directamente sin pasar por la cola de aprobación.</p>
+        </div>
+      </div>
+    </div>
+
+    <!-- TAB 7: LOGIN -->
+    <div id="login" class="tab-panel">
+      <div class="screen-desc">
+        <h3>7. Autenticación y Acceso Seguro (/login · /registro)</h3>
+        <p>Pantalla de inicio de sesión hospitalaria con cifrado JWT, verificación de roles (Admin, Farmacéutico, Médico) y enlaces a registro.</p>
+      </div>
+      <div class="wf-window">
+        <div class="wf-header-bar">
+          <span class="dot dot-red"></span><span class="dot dot-yellow"></span><span class="dot dot-green"></span>
+          <span class="wf-title">07_login_registro.png · Wireframe HD (1600 × 1540 px)</span>
+        </div>
+        <div class="wf-body">
+          <div class="img-box">
+            <a href="../Wireframes/07_login_registro.png" target="_blank">
+              <img src="../Wireframes/07_login_registro.png" alt="Wireframe Autenticación y Login">
+            </a>
+          </div>
+        </div>
+      </div>
+      <div class="components-grid">
+        <div class="comp-item">
+          <h4>Seguridad Criptográfica</h4>
+          <p>Contraseñas con hash PBKDF2-SHA256, tokens JWT firmados en cookies HttpOnly y bloqueo temporal tras 5 intentos erróneos.</p>
+        </div>
+        <div class="comp-item">
+          <h4>Separación de Roles</h4>
+          <p>Control visual por perfil: Administrador (pleno control), Farmacéutico (dispensación/inventario) y Médico (consultas y recetas).</p>
+        </div>
+      </div>
+    </div>
+
+  </div>
+
+  <script>
+    function showTab(tabId) {
+      document.querySelectorAll('.tab-panel').forEach(p => p.classList.remove('active'));
+      document.querySelectorAll('.tab-btn').forEach(b => b.classList.remove('active'));
+      
+      const target = document.getElementById(tabId);
+      if (target) target.classList.add('active');
+      
+      const btn = Array.from(document.querySelectorAll('.tab-btn')).find(b => b.getAttribute('onclick').includes(tabId));
+      if (btn) btn.classList.add('active');
+    }
+  </script>
+</body>
+</html>

@@ -1,0 +1,12 @@
+{% extends "base.html" %}
+{% block title %}{{ codigo }}{% endblock %}
+{% block bodyclass %}auth{% endblock %}
+{% block body %}
+<div class="auth-bg" aria-hidden="true"><span class="blob b1"></span><span class="blob b2"></span><span class="blob b3"></span></div>
+<main class="auth-card error-card">
+  <div class="error-code">{{ codigo }}</div>
+  <h1>{{ titulo }}</h1>
+  <p class="muted">{{ detalle }}</p>
+  <a class="btn btn-primary" href="/dashboard">Volver al inicio</a>
+</main>
+{% endblock %}

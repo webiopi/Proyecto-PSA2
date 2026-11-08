@@ -1,0 +1,698 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 2400 1660" width="2400" height="1660">
+  <defs>
+    <style>
+      @import url('https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&amp;display=swap');
+      text { font-family: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif; }
+      .bg { fill: #0b1120; }
+      .grid-pattern { stroke: #1e293b; stroke-width: 1; stroke-opacity: 0.35; }
+      
+      /* Titles */
+      .main-title { font-size: 32px; font-weight: 800; fill: #f8fafc; letter-spacing: -0.5px; }
+      .main-sub { font-size: 15px; font-weight: 500; fill: #94a3b8; }
+      
+      /* Wireframe window cards */
+      .wf-card { fill: #111a2e; stroke: #334155; stroke-width: 1.5; rx: 12px; filter: drop-shadow(0 14px 25px rgba(0,0,0,0.5)); }
+      .wf-window-title { font-size: 13px; font-weight: 700; fill: #cbd5e1; }
+      .wf-tag { font-size: 11px; font-weight: 700; }
+      
+      /* Layout UI elements */
+      .wf-sidebar { fill: #0d1527; stroke: #1e293b; stroke-width: 1; }
+      .wf-topbar { fill: #142036; stroke: #1e293b; stroke-width: 1; }
+      
+      /* Controls */
+      .wf-box { fill: #172339; stroke: #334155; stroke-width: 1; rx: 6px; }
+      .wf-box-active { fill: #1e293b; stroke: #38bdf8; stroke-width: 1.5; rx: 6px; }
+      .wf-btn { fill: #2563eb; rx: 5px; }
+      .wf-btn-text { font-size: 11px; font-weight: 700; fill: #ffffff; text-anchor: middle; }
+      .wf-btn-ghost { fill: #1e293b; stroke: #475569; stroke-width: 1; rx: 5px; }
+      .wf-btn-ghost-text { font-size: 11px; font-weight: 600; fill: #94a3b8; text-anchor: middle; }
+      .wf-btn-success { fill: #059669; rx: 4px; }
+      .wf-btn-danger { fill: #dc2626; rx: 4px; }
+      
+      /* Text */
+      .wf-label { font-size: 11px; font-weight: 600; fill: #94a3b8; }
+      .wf-text-sm { font-size: 10px; font-weight: 500; fill: #64748b; }
+      .wf-text-white { font-size: 11px; font-weight: 600; fill: #f1f5f9; }
+      
+      /* Badges */
+      .badge-crit { fill: #991b1b; rx: 4px; }
+      .badge-warn { fill: #b45309; rx: 4px; }
+      .badge-ok { fill: #065f46; rx: 4px; }
+      .badge-txt { font-size: 9px; font-weight: 800; fill: #ffffff; text-anchor: middle; }
+      
+      /* Modal styles */
+      .modal-box { fill: #152238; stroke: #475569; stroke-width: 2; rx: 10px; filter: drop-shadow(0 20px 30px rgba(0,0,0,0.7)); }
+      .ai-box { fill: #1a2234; stroke: #8b5cf6; stroke-width: 1.5; rx: 8px; }
+    </style>
+    
+    <pattern id="wf-grid" x="0" y="0" width="24" height="24" patternUnits="userSpaceOnUse">
+      <circle cx="2" cy="2" r="1" fill="#334155" fill-opacity="0.3"/>
+    </pattern>
+  </defs>
+
+  <!-- Background -->
+  <rect width="100%" height="100%" class="bg" />
+  <rect width="100%" height="100%" fill="url(#wf-grid)" />
+
+  <!-- HEADER -->
+  <g transform="translate(60, 45)">
+    <rect x="0" y="0" width="56" height="56" rx="14" fill="#1e293b" stroke="#38bdf8" stroke-width="2"/>
+    <rect x="14" y="14" width="12" height="12" rx="2" fill="#38bdf8"/>
+    <rect x="30" y="14" width="12" height="12" rx="2" fill="#818cf8"/>
+    <rect x="14" y="30" width="28" height="12" rx="2" fill="#334155"/>
+    
+    <text x="74" y="28" class="main-title">SIFARH · Wireframes &amp; Arquitectura de Pantallas (UI/UX Blueprint)</text>
+    <text x="74" y="50" class="main-sub">Diseño de interfaz de usuario de las 6 vistas y flujos clave del sistema hospitalario monolítico SSR</text>
+    
+    <rect x="2020" y="10" width="260" height="38" rx="19" fill="#1e293b" stroke="#334155" stroke-width="1.5"/>
+    <circle cx="2040" cy="29" r="6" fill="#10b981"/>
+    <text x="2058" y="33" font-size="12px" font-weight="700" fill="#38bdf8">FastAPI + Jinja2 + CSS Grid</text>
+  </g>
+
+  <!-- ======================================================== -->
+  <!-- SCREEN 1: DASHBOARD / REPORTES (Top-Left)                -->
+  <!-- ======================================================== -->
+  <g transform="translate(60, 130)">
+    <rect width="720" height="690" class="wf-card"/>
+    <path d="M 0 12 Q 0 0 12 0 L 708 0 Q 720 0 720 12 L 720 40 L 0 40 Z" fill="#1e293b"/>
+    <circle cx="20" cy="20" r="5" fill="#ef4444"/>
+    <circle cx="36" cy="20" r="5" fill="#f59e0b"/>
+    <circle cx="52" cy="20" r="5" fill="#10b981"/>
+    <text x="75" y="24" class="wf-window-title">1. Dashboard Ejecutivo &amp; Reportes (/dashboard)</text>
+    <rect x="580" y="8" width="125" height="24" rx="12" fill="#0369a1"/>
+    <text x="642" y="24" class="wf-tag" fill="#e0f2fe" text-anchor="middle">Vista General</text>
+
+    <!-- Sidebar Mini (Left) -->
+    <rect x="1" y="40" width="130" height="648" class="wf-sidebar"/>
+    <rect x="12" y="52" width="22" height="22" rx="6" fill="#2563eb"/>
+    <text x="40" y="64" font-size="11px" font-weight="800" fill="#ffffff">SIFARH</text>
+    <text x="40" y="75" font-size="8px" fill="#64748b">Farmacia hosp.</text>
+    
+    <rect x="8" y="90" width="116" height="26" rx="5" fill="#1e293b" stroke="#38bdf8" stroke-width="1"/>
+    <text x="18" y="107" font-size="10px" font-weight="700" fill="#38bdf8">📊 Reportes</text>
+    <text x="18" y="132" font-size="10px" font-weight="600" fill="#94a3b8">🔍 Consulta</text>
+    <text x="18" y="157" font-size="10px" font-weight="600" fill="#94a3b8">📦 Inventario</text>
+    <text x="18" y="182" font-size="10px" font-weight="600" fill="#94a3b8">👥 Usuarios</text>
+    
+    <line x1="8" y1="620" x2="124" y2="620" stroke="#1e293b"/>
+    <circle cx="24" cy="645" r="12" fill="#334155"/>
+    <text x="24" y="649" font-size="10px" font-weight="700" fill="#f8fafc" text-anchor="middle">A</text>
+    <text x="42" y="643" font-size="10px" font-weight="700" fill="#f8fafc">Dr. Arturo</text>
+    <text x="42" y="654" font-size="8px" fill="#38bdf8">Admin</text>
+
+    <!-- Topbar (Main) -->
+    <g transform="translate(131, 40)">
+      <rect width="588" height="48" class="wf-topbar"/>
+      <text x="18" y="24" font-size="13px" font-weight="700" fill="#f8fafc">Reportes de Inventario</text>
+      <text x="18" y="38" font-size="9px" fill="#64748b">Resumen del estado y alertas críticas</text>
+      
+      <rect x="360" y="10" width="105" height="28" class="wf-btn-ghost"/>
+      <text x="412" y="28" class="wf-btn-ghost-text">⬇ Exportar CSV</text>
+      
+      <rect x="475" y="10" width="100" height="28" fill="#7c3aed" rx="5"/>
+      <text x="525" y="28" class="wf-btn-text">✨ Análisis IA</text>
+    </g>
+
+    <!-- Body Area -->
+    <g transform="translate(145, 102)">
+      <!-- 4 KPI Cards -->
+      <rect x="0" y="0" width="130" height="70" class="wf-box" stroke="#3b82f6" stroke-width="1.2"/>
+      <text x="10" y="18" class="wf-label">Total Fármacos</text>
+      <text x="10" y="44" font-size="20px" font-weight="800" fill="#60a5fa">148</text>
+      <text x="10" y="60" class="wf-text-sm">En inventario</text>
+
+      <rect x="140" y="0" width="130" height="70" class="wf-box" stroke="#f59e0b" stroke-width="1.2"/>
+      <text x="150" y="18" class="wf-label">Por Caducar</text>
+      <text x="150" y="44" font-size="20px" font-weight="800" fill="#fbbf24">12</text>
+      <text x="150" y="60" class="wf-text-sm">Próx. 90 días</text>
+
+      <rect x="280" y="0" width="130" height="70" class="wf-box" stroke="#ef4444" stroke-width="1.2"/>
+      <text x="290" y="18" class="wf-label">Stock Crítico</text>
+      <text x="290" y="44" font-size="20px" font-weight="800" fill="#f87171">6</text>
+      <text x="290" y="60" class="wf-text-sm">Bajo mínimo</text>
+
+      <rect x="420" y="0" width="140" height="70" class="wf-box" stroke="#10b981" stroke-width="1.2"/>
+      <circle cx="452" cy="35" r="22" fill="#064e3b" stroke="#10b981" stroke-width="4"/>
+      <text x="452" y="39" font-size="11px" font-weight="800" fill="#6ee7b7" text-anchor="middle">88%</text>
+      <text x="484" y="30" class="wf-label">Salud Stock</text>
+      <text x="484" y="46" class="wf-text-sm">130 sin alertas</text>
+
+      <!-- 2 Columns Grid: Alertas -->
+      <rect x="0" y="85" width="270" height="260" class="wf-box"/>
+      <text x="12" y="106" font-size="12px" font-weight="700" fill="#fbbf24">⏳ Próximos a Caducar</text>
+      <rect x="220" y="93" width="38" height="16" class="wf-btn-ghost"/>
+      <text x="239" y="105" font-size="9px" fill="#94a3b8" text-anchor="middle">CSV</text>
+      <line x1="10" y1="116" x2="260" y2="116" stroke="#334155"/>
+
+      <text x="12" y="136" class="wf-text-white">Amoxicilina 500mg</text>
+      <text x="12" y="148" class="wf-text-sm">Lote A99 · 15/11/2026</text>
+      <rect x="195" y="130" width="65" height="16" class="badge-warn"/>
+      <text x="227" y="142" class="badge-txt">Caduca 39d</text>
+      <line x1="10" y1="158" x2="260" y2="158" stroke="#1e293b"/>
+
+      <text x="12" y="178" class="wf-text-white">Omeprazol 20mg</text>
+      <text x="12" y="190" class="wf-text-sm">Lote OM24 · 02/10/2026</text>
+      <rect x="195" y="172" width="65" height="16" class="badge-crit"/>
+      <text x="227" y="184" class="badge-txt">CADUCADO</text>
+      <line x1="10" y1="200" x2="260" y2="200" stroke="#1e293b"/>
+
+      <text x="12" y="220" class="wf-text-white">Paracetamol IV 1g</text>
+      <text x="12" y="232" class="wf-text-sm">Lote P01 · 28/11/2026</text>
+      <rect x="195" y="214" width="65" height="16" class="badge-warn"/>
+      <text x="227" y="226" class="badge-txt">Caduca 52d</text>
+
+      <rect x="285" y="85" width="275" height="260" class="wf-box"/>
+      <text x="297" y="106" font-size="12px" font-weight="700" fill="#f87171">🚨 Stock Crítico</text>
+      <line x1="295" y1="116" x2="550" y2="116" stroke="#334155"/>
+
+      <text x="297" y="136" class="wf-text-white">Fentanilo 0.05mg</text>
+      <text x="297" y="148" class="wf-text-sm">Stock: 2 (Mín: 15 · Máx: 60)</text>
+      <rect x="480" y="130" width="65" height="16" class="badge-crit"/>
+      <text x="512" y="142" class="badge-txt">Crítico</text>
+      <line x1="295" y1="158" x2="550" y2="158" stroke="#1e293b"/>
+
+      <text x="297" y="178" class="wf-text-white">Adrenalina 1mg/ml</text>
+      <text x="297" y="190" class="wf-text-sm">Stock: 4 (Mín: 20 · Máx: 80)</text>
+      <rect x="480" y="172" width="65" height="16" class="badge-crit"/>
+      <text x="512" y="184" class="badge-txt">Crítico</text>
+      <line x1="295" y1="200" x2="550" y2="200" stroke="#1e293b"/>
+
+      <text x="297" y="220" class="wf-text-white">Insulina Rápida</text>
+      <text x="297" y="232" class="wf-text-sm">Stock: 5 (Mín: 10 · Máx: 40)</text>
+      <rect x="480" y="214" width="65" height="16" class="badge-crit"/>
+      <text x="512" y="226" class="badge-txt">Crítico</text>
+
+      <!-- Table Section: Historial de Órdenes -->
+      <rect x="0" y="360" width="560" height="210" class="wf-box"/>
+      <text x="12" y="382" font-size="12px" font-weight="700" fill="#f8fafc">🧾 Órdenes de Compra Recientes</text>
+      <line x1="10" y1="392" x2="550" y2="392" stroke="#334155"/>
+      <text x="15" y="410" font-size="9px" font-weight="700" fill="#64748b">ORDEN</text>
+      <text x="75" y="410" font-size="9px" font-weight="700" fill="#64748b">FECHA</text>
+      <text x="165" y="410" font-size="9px" font-weight="700" fill="#64748b">MÉDICO</text>
+      <text x="270" y="410" font-size="9px" font-weight="700" fill="#64748b">FÁRMACOS</text>
+      <text x="440" y="410" font-size="9px" font-weight="700" fill="#64748b">ESTADO</text>
+      <line x1="10" y1="418" x2="550" y2="418" stroke="#1e293b"/>
+
+      <text x="15" y="438" font-size="10px" font-weight="700" fill="#38bdf8">#104</text>
+      <text x="75" y="438" font-size="10px" fill="#cbd5e1">Hoy 09:30</text>
+      <text x="165" y="438" font-size="10px" fill="#cbd5e1">Dra. Gómez</text>
+      <text x="270" y="438" font-size="10px" fill="#94a3b8">Paracetamol (10), Ibuprofeno (5)</text>
+      <rect x="440" y="426" width="65" height="16" fill="#1e3a8a" rx="4"/>
+      <text x="472" y="438" font-size="9px" font-weight="700" fill="#93c5fd" text-anchor="middle">Pendiente</text>
+      <line x1="10" y1="448" x2="550" y2="448" stroke="#1e293b"/>
+
+      <text x="15" y="468" font-size="10px" font-weight="700" fill="#38bdf8">#103</text>
+      <text x="75" y="468" font-size="10px" fill="#cbd5e1">Ayer 16:15</text>
+      <text x="165" y="468" font-size="10px" fill="#cbd5e1">Dr. Ramírez</text>
+      <text x="270" y="468" font-size="10px" fill="#94a3b8">Ceftriaxona (20)</text>
+      <rect x="440" y="456" width="65" height="16" class="badge-ok"/>
+      <text x="472" y="468" font-size="9px" font-weight="700" fill="#a7f3d0" text-anchor="middle">Confirmada</text>
+    </g>
+  </g>
+
+  <!-- ======================================================== -->
+  <!-- SCREEN 2: INVENTARIO & ORDENES (Top-Center)              -->
+  <!-- ======================================================== -->
+  <g transform="translate(840, 130)">
+    <rect width="720" height="690" class="wf-card"/>
+    <path d="M 0 12 Q 0 0 12 0 L 708 0 Q 720 0 720 12 L 720 40 L 0 40 Z" fill="#1e293b"/>
+    <circle cx="20" cy="20" r="5" fill="#ef4444"/>
+    <circle cx="36" cy="20" r="5" fill="#f59e0b"/>
+    <circle cx="52" cy="20" r="5" fill="#10b981"/>
+    <text x="75" y="24" class="wf-window-title">2. Gestión de Inventario &amp; Aprobación (/inventario)</text>
+    <rect x="580" y="8" width="125" height="24" rx="12" fill="#065f46"/>
+    <text x="642" y="24" class="wf-tag" fill="#a7f3d0" text-anchor="middle">CRUD &amp; Pedidos</text>
+
+    <g transform="translate(20, 52)">
+      <text x="0" y="22" font-size="14px" font-weight="700" fill="#f8fafc">Inventario General</text>
+      <text x="0" y="36" font-size="9px" fill="#64748b">Control de lotes, existencias y dispensación</text>
+      
+      <rect x="395" y="10" width="145" height="28" class="wf-btn"/>
+      <text x="467" y="28" class="wf-btn-text">＋ Nuevo medicamento</text>
+
+      <rect x="555" y="10" width="125" height="28" fill="#10b981" rx="5"/>
+      <text x="617" y="28" class="wf-btn-text">🛒 Pedido Clínico</text>
+    </g>
+
+    <!-- Pending Orders Approval Banner -->
+    <g transform="translate(20, 105)">
+      <rect width="680" height="150" class="wf-box" stroke="#f59e0b" stroke-width="1.2"/>
+      <text x="16" y="24" font-size="12px" font-weight="700" fill="#fbbf24">🧾 Órdenes de Compra Pendientes</text>
+      <rect x="250" y="12" width="22" height="16" rx="8" fill="#78350f"/>
+      <text x="261" y="24" font-size="10px" font-weight="800" fill="#fde68a" text-anchor="middle">1</text>
+      <text x="16" y="38" font-size="9px" fill="#94a3b8">Al confirmar la orden se rebajan existencias del inventario automáticamente.</text>
+      <line x1="16" y1="46" x2="664" y2="46" stroke="#334155"/>
+      
+      <text x="20" y="66" font-size="9px" font-weight="700" fill="#64748b">ORDEN</text>
+      <text x="80" y="66" font-size="9px" font-weight="700" fill="#64748b">MÉDICO</text>
+      <text x="180" y="66" font-size="9px" font-weight="700" fill="#64748b">MEDICAMENTOS SOLICITADOS</text>
+      <text x="420" y="66" font-size="9px" font-weight="700" fill="#64748b">NOTAS</text>
+      <text x="560" y="66" font-size="9px" font-weight="700" fill="#64748b">ACCIONES</text>
+      
+      <text x="20" y="94" font-size="11px" font-weight="800" fill="#38bdf8">#104</text>
+      <text x="80" y="94" font-size="11px" fill="#f8fafc">Dra. Gómez</text>
+      <text x="180" y="90" font-size="10px" fill="#cbd5e1">• Paracetamol 500mg × 10</text>
+      <text x="180" y="105" font-size="10px" fill="#cbd5e1">• Ibuprofeno 400mg × 5</text>
+      <text x="420" y="94" font-size="10px" fill="#94a3b8">Urgencias Sala 3</text>
+      
+      <rect x="550" y="82" width="55" height="24" class="wf-btn-success"/>
+      <text x="577" y="98" font-size="10px" font-weight="700" fill="#ffffff" text-anchor="middle">Confirmar</text>
+      
+      <rect x="612" y="82" width="52" height="24" class="wf-btn-danger"/>
+      <text x="638" y="98" font-size="10px" font-weight="700" fill="#ffffff" text-anchor="middle">Rechazar</text>
+    </g>
+
+    <!-- Inventory Data Table -->
+    <g transform="translate(20, 275)">
+      <rect width="680" height="385" class="wf-box"/>
+      <rect x="1" y="1" width="678" height="32" fill="#1e293b" rx="6"/>
+      <text x="16" y="21" font-size="10px" font-weight="700" fill="#94a3b8">FÁRMACO / ACTIVO</text>
+      <text x="190" y="21" font-size="10px" font-weight="700" fill="#94a3b8">LOTE</text>
+      <text x="270" y="21" font-size="10px" font-weight="700" fill="#94a3b8">CADUCIDAD</text>
+      <text x="390" y="21" font-size="10px" font-weight="700" fill="#94a3b8">STOCK (ACT / MIN / MAX)</text>
+      <text x="560" y="21" font-size="10px" font-weight="700" fill="#94a3b8">ACCIONES</text>
+
+      <!-- Row 1 (Normal) -->
+      <g transform="translate(0, 35)">
+        <text x="16" y="20" class="wf-text-white">Amoxicilina 500mg</text>
+        <text x="16" y="32" class="wf-text-sm">Amoxicilina trihidrato</text>
+        <text x="190" y="22" font-size="10px" fill="#cbd5e1">L-2401</text>
+        <text x="270" y="22" font-size="10px" fill="#cbd5e1">12/08/2027</text>
+        <text x="390" y="22" font-size="10px" font-weight="700" fill="#10b981">120 <tspan fill="#64748b" font-weight="500">/ 30 / 200</tspan></text>
+        <rect x="560" y="10" width="38" height="20" class="wf-btn-ghost"/>
+        <text x="579" y="23" font-size="9px" fill="#cbd5e1" text-anchor="middle">Editar</text>
+        <rect x="604" y="10" width="45" height="20" class="wf-btn-ghost"/>
+        <text x="626" y="23" font-size="9px" fill="#f87171" text-anchor="middle">Eliminar</text>
+        <line x1="16" y1="42" x2="664" y2="42" stroke="#1e293b"/>
+      </g>
+
+      <!-- Row 2 (Alerta Crítica Stock) -->
+      <g transform="translate(0, 80)">
+        <rect x="2" y="2" width="676" height="42" fill="rgba(239, 68, 68, 0.1)"/>
+        <text x="16" y="20" font-size="11px" font-weight="700" fill="#fca5a5">Fentanilo 0.05mg</text>
+        <text x="16" y="32" class="wf-text-sm">Fentanilo citrato</text>
+        <text x="190" y="22" font-size="10px" fill="#cbd5e1">F-8812</text>
+        <text x="270" y="22" font-size="10px" fill="#cbd5e1">20/05/2027</text>
+        <text x="390" y="22" font-size="10px" font-weight="700" fill="#ef4444">2 <tspan fill="#fca5a5" font-weight="500">/ 15 / 60 (Bajo mín)</tspan></text>
+        <rect x="560" y="10" width="38" height="20" class="wf-btn-ghost"/>
+        <text x="579" y="23" font-size="9px" fill="#cbd5e1" text-anchor="middle">Editar</text>
+        <line x1="16" y1="44" x2="664" y2="44" stroke="#1e293b"/>
+      </g>
+
+      <!-- Row 3 (Alerta Caducidad) -->
+      <g transform="translate(0, 130)">
+        <rect x="2" y="2" width="676" height="42" fill="rgba(245, 158, 11, 0.1)"/>
+        <text x="16" y="20" font-size="11px" font-weight="700" fill="#fde68a">Paracetamol IV 1g</text>
+        <text x="16" y="32" class="wf-text-sm">Paracetamol</text>
+        <text x="190" y="22" font-size="10px" fill="#cbd5e1">P-0019</text>
+        <text x="270" y="22" font-size="10px" font-weight="700" fill="#fbbf24">28/11/2026 (52d)</text>
+        <text x="390" y="22" font-size="10px" font-weight="700" fill="#cbd5e1">45 <tspan fill="#64748b" font-weight="500">/ 20 / 100</tspan></text>
+        <rect x="560" y="10" width="38" height="20" class="wf-btn-ghost"/>
+        <text x="579" y="23" font-size="9px" fill="#cbd5e1" text-anchor="middle">Editar</text>
+        <line x1="16" y1="44" x2="664" y2="44" stroke="#1e293b"/>
+      </g>
+
+      <!-- Row 4 (Caducado) -->
+      <g transform="translate(0, 180)">
+        <rect x="2" y="2" width="676" height="42" fill="rgba(220, 38, 38, 0.15)"/>
+        <text x="16" y="20" font-size="11px" font-weight="700" fill="#fca5a5">Omeprazol 20mg</text>
+        <text x="16" y="32" class="wf-text-sm">Omeprazol sódico</text>
+        <text x="190" y="22" font-size="10px" fill="#cbd5e1">OM-24</text>
+        <text x="270" y="22" font-size="10px" font-weight="800" fill="#ef4444">02/10/2026 (Venc.)</text>
+        <text x="390" y="22" font-size="10px" font-weight="700" fill="#cbd5e1">18 <tspan fill="#64748b" font-weight="500">/ 10 / 50</tspan></text>
+        <rect x="560" y="10" width="38" height="20" class="wf-btn-ghost"/>
+        <text x="579" y="23" font-size="9px" fill="#cbd5e1" text-anchor="middle">Editar</text>
+      </g>
+
+      <!-- Pagination bar -->
+      <g transform="translate(0, 345)">
+        <line x1="10" y1="0" x2="670" y2="0" stroke="#334155"/>
+        <text x="16" y="24" class="wf-text-sm">Mostrando 1 a 15 de 148 medicamentos</text>
+        <rect x="500" y="10" width="28" height="22" class="wf-btn-ghost"/>
+        <text x="514" y="24" font-size="10px" fill="#cbd5e1" text-anchor="middle">1</text>
+        <rect x="535" y="10" width="28" height="22" class="wf-box-active"/>
+        <text x="549" y="24" font-size="10px" font-weight="700" fill="#38bdf8" text-anchor="middle">2</text>
+        <rect x="570" y="10" width="28" height="22" class="wf-btn-ghost"/>
+        <text x="584" y="24" font-size="10px" fill="#cbd5e1" text-anchor="middle">3</text>
+        <rect x="605" y="10" width="55" height="22" class="wf-btn-ghost"/>
+        <text x="632" y="24" font-size="10px" fill="#cbd5e1" text-anchor="middle">Sig »</text>
+      </g>
+    </g>
+  </g>
+
+  <!-- ======================================================== -->
+  <!-- SCREEN 3: MODAL PEDIDO & IA (Top-Right)                  -->
+  <!-- ======================================================== -->
+  <g transform="translate(1620, 130)">
+    <rect width="720" height="690" class="wf-card"/>
+    <path d="M 0 12 Q 0 0 12 0 L 708 0 Q 720 0 720 12 L 720 40 L 0 40 Z" fill="#1e293b"/>
+    <circle cx="20" cy="20" r="5" fill="#ef4444"/>
+    <circle cx="36" cy="20" r="5" fill="#f59e0b"/>
+    <circle cx="52" cy="20" r="5" fill="#10b981"/>
+    <text x="75" y="24" class="wf-window-title">3. Modal: Pedido Clínico con Asistente IA (Ollama)</text>
+    <rect x="580" y="8" width="125" height="24" rx="12" fill="#6d28d9"/>
+    <text x="642" y="24" class="wf-tag" fill="#ddd6fe" text-anchor="middle">IA &amp; Prescripción</text>
+
+    <rect x="1" y="40" width="718" height="648" fill="rgba(10, 15, 30, 0.6)"/>
+
+    <g transform="translate(30, 60)">
+      <rect width="660" height="600" class="modal-box"/>
+      
+      <path d="M 0 10 Q 0 0 10 0 L 650 0 Q 660 0 660 10 L 660 48 L 0 48 Z" fill="#1e293b"/>
+      <text x="20" y="30" font-size="14px" font-weight="700" fill="#f8fafc">🛒 Nuevo Pedido de Medicamentos</text>
+      <text x="630" y="30" font-size="16px" fill="#94a3b8" cursor="pointer">✕</text>
+      <line x1="0" y1="48" x2="660" y2="48" stroke="#334155"/>
+
+      <!-- Modal Body (2 Columns) -->
+      <g transform="translate(20, 65)">
+        <text x="0" y="14" class="wf-label">1. BUSCAR MEDICAMENTO EN STOCK</text>
+        <rect x="0" y="22" width="300" height="34" class="wf-box"/>
+        <text x="12" y="44" font-size="11px" fill="#94a3b8">🔍 Escribe nombre o principio activo...</text>
+        
+        <rect x="0" y="62" width="300" height="120" class="wf-box" stroke="#38bdf8"/>
+        <text x="12" y="82" font-size="11px" font-weight="700" fill="#f8fafc">Amoxicilina 500mg</text>
+        <text x="12" y="94" font-size="9px" fill="#94a3b8">Stock disponible: 120 · Lote A24</text>
+        <rect x="235" y="74" width="55" height="22" class="wf-btn"/>
+        <text x="262" y="88" font-size="10px" font-weight="700" fill="#ffffff" text-anchor="middle">＋ Añadir</text>
+        <line x1="8" y1="102" x2="292" y2="102" stroke="#1e293b"/>
+
+        <text x="12" y="120" font-size="11px" font-weight="700" fill="#f8fafc">Ibuprofeno 400mg</text>
+        <text x="12" y="132" font-size="9px" fill="#94a3b8">Stock disponible: 85 · Lote IB99</text>
+        <rect x="235" y="112" width="55" height="22" class="wf-btn"/>
+        <text x="262" y="126" font-size="10px" font-weight="700" fill="#ffffff" text-anchor="middle">＋ Añadir</text>
+
+        <!-- AI Assistant Box -->
+        <g transform="translate(0, 195)">
+          <rect width="300" height="260" class="ai-box"/>
+          <text x="14" y="24" font-size="12px" font-weight="800" fill="#c084fc">✨ Asistente IA (Ollama)</text>
+          <text x="14" y="38" font-size="9px" fill="#a855f7">Sugerencias basadas en el inventario disponible</text>
+          
+          <text x="14" y="62" class="wf-label">Describe la dolencia o cuadro clínico:</text>
+          <rect x="14" y="70" width="272" height="42" fill="#0f172a" stroke="#6d28d9" stroke-width="1" rx="5"/>
+          <text x="22" y="88" font-size="10px" fill="#e2e8f0">Infección respiratoria alta con fiebre</text>
+          <text x="22" y="102" font-size="10px" fill="#e2e8f0">y dolor faríngeo en adulto...</text>
+
+          <rect x="14" y="120" width="272" height="28" fill="#8b5cf6" rx="5"/>
+          <text x="150" y="138" class="wf-btn-text">🪄 Sugerir Fármacos Disponibles</text>
+
+          <rect x="14" y="156" width="272" height="90" fill="#131c2e" stroke="#475569" stroke-width="1" rx="5"/>
+          <text x="22" y="174" font-size="10px" font-weight="700" fill="#38bdf8">Sugerencia recomendada:</text>
+          <text x="22" y="190" font-size="9px" fill="#cbd5e1">• Amoxicilina 500mg (8h × 7d)</text>
+          <text x="22" y="204" font-size="9px" fill="#cbd5e1">• Paracetamol 1g (c/8h dolor)</text>
+          <text x="22" y="224" font-size="8px" fill="#10b981">✔ Ambos con stock suficiente en almacén</text>
+        </g>
+      </g>
+
+      <!-- Right Column: Cart & Details -->
+      <g transform="translate(340, 65)">
+        <text x="0" y="14" class="wf-label">2. MEDICAMENTOS DEL PEDIDO (CARRITO)</text>
+        <rect x="0" y="22" width="300" height="230" class="wf-box"/>
+        
+        <g transform="translate(10, 32)">
+          <text x="0" y="14" font-size="11px" font-weight="700" fill="#f8fafc">Amoxicilina 500mg</text>
+          <text x="0" y="26" font-size="9px" fill="#94a3b8">Cajas / Unidades:</text>
+          <rect x="180" y="8" width="50" height="24" class="wf-box"/>
+          <text x="205" y="24" font-size="11px" font-weight="700" fill="#f8fafc" text-anchor="middle">10</text>
+          <text x="250" y="24" font-size="12px" fill="#ef4444" cursor="pointer">🗑</text>
+          <line x1="0" y1="36" x2="280" y2="36" stroke="#1e293b"/>
+        </g>
+
+        <g transform="translate(10, 78)">
+          <text x="0" y="14" font-size="11px" font-weight="700" fill="#f8fafc">Ibuprofeno 400mg</text>
+          <text x="0" y="26" font-size="9px" fill="#94a3b8">Cajas / Unidades:</text>
+          <rect x="180" y="8" width="50" height="24" class="wf-box"/>
+          <text x="205" y="24" font-size="11px" font-weight="700" fill="#f8fafc" text-anchor="middle">5</text>
+          <text x="250" y="24" font-size="12px" fill="#ef4444" cursor="pointer">🗑</text>
+          <line x1="0" y1="36" x2="280" y2="36" stroke="#1e293b"/>
+        </g>
+
+        <text x="14" y="210" font-size="11px" font-weight="700" fill="#cbd5e1">Total ítems en pedido: 15 unidades</text>
+
+        <g transform="translate(0, 265)">
+          <text x="0" y="14" class="wf-label">3. NOTAS CLÍNICAS / OBSERVACIONES:</text>
+          <rect x="0" y="22" width="300" height="60" class="wf-box"/>
+          <text x="12" y="42" font-size="10px" fill="#cbd5e1">Servicio de Urgencias - Box 3.</text>
+          <text x="12" y="56" font-size="10px" fill="#cbd5e1">Paciente ingresado en observación.</text>
+        </g>
+      </g>
+
+      <!-- Modal Footer -->
+      <g transform="translate(0, 545)">
+        <line x1="0" y1="0" x2="660" y2="0" stroke="#334155"/>
+        <rect x="420" y="12" width="100" height="34" class="wf-btn-ghost"/>
+        <text x="470" y="33" class="wf-btn-ghost-text">Cancelar</text>
+        
+        <rect x="530" y="12" width="115" height="34" class="wf-btn"/>
+        <text x="587" y="33" class="wf-btn-text">Confirmar Pedido »</text>
+      </g>
+    </g>
+  </g>
+
+  <!-- ======================================================== -->
+  <!-- SCREEN 4: CONSULTA RÁPIDA (Bottom-Left)                  -->
+  <!-- ======================================================== -->
+  <g transform="translate(60, 850)">
+    <rect width="720" height="690" class="wf-card"/>
+    <path d="M 0 12 Q 0 0 12 0 L 708 0 Q 720 0 720 12 L 720 40 L 0 40 Z" fill="#1e293b"/>
+    <circle cx="20" cy="20" r="5" fill="#ef4444"/>
+    <circle cx="36" cy="20" r="5" fill="#f59e0b"/>
+    <circle cx="52" cy="20" r="5" fill="#10b981"/>
+    <text x="75" y="24" class="wf-window-title">4. Consulta Rápida de Inventario &amp; Mostrador (/consulta)</text>
+    <rect x="580" y="8" width="125" height="24" rx="12" fill="#0284c7"/>
+    <text x="642" y="24" class="wf-tag" fill="#e0f2fe" text-anchor="middle">Búsqueda Ágil</text>
+
+    <g transform="translate(20, 55)">
+      <text x="0" y="20" font-size="14px" font-weight="700" fill="#f8fafc">Consulta Multidimensional de Fármacos</text>
+      <text x="0" y="34" font-size="9px" fill="#64748b">Filtros por nombre comercial, principio activo, lote o estado de riesgo</text>
+
+      <rect x="0" y="48" width="680" height="110" class="wf-box"/>
+      <g transform="translate(16, 62)">
+        <text x="0" y="12" class="wf-label">Nombre Comercial</text>
+        <rect x="0" y="20" width="145" height="32" class="wf-box"/>
+        <text x="10" y="40" font-size="10px" fill="#f8fafc">Paracetamol</text>
+
+        <text x="160" y="12" class="wf-label">Principio Activo</text>
+        <rect x="160" y="20" width="145" height="32" class="wf-box"/>
+        <text x="170" y="40" font-size="10px" fill="#64748b">Todos...</text>
+
+        <text x="320" y="12" class="wf-label">Lote</text>
+        <rect x="320" y="20" width="115" height="32" class="wf-box"/>
+        <text x="330" y="40" font-size="10px" fill="#64748b">Ej. L2411</text>
+
+        <text x="450" y="12" class="wf-label">Estado de Alerta</text>
+        <rect x="450" y="20" width="105" height="32" class="wf-box"/>
+        <text x="460" y="40" font-size="10px" fill="#f8fafc">Cualquiera ▾</text>
+
+        <rect x="570" y="20" width="85" height="32" class="wf-btn"/>
+        <text x="612" y="40" class="wf-btn-text">🔍 Buscar</text>
+      </g>
+
+      <!-- Results Table -->
+      <rect x="0" y="175" width="680" height="420" class="wf-box"/>
+      <rect x="1" y="176" width="678" height="32" fill="#1e293b" rx="6"/>
+      <text x="16" y="196" font-size="10px" font-weight="700" fill="#94a3b8">MEDICAMENTO</text>
+      <text x="210" y="196" font-size="10px" font-weight="700" fill="#94a3b8">PRINCIPIO ACTIVO</text>
+      <text x="360" y="196" font-size="10px" font-weight="700" fill="#94a3b8">LOTE</text>
+      <text x="440" y="196" font-size="10px" font-weight="700" fill="#94a3b8">CADUCIDAD</text>
+      <text x="560" y="196" font-size="10px" font-weight="700" fill="#94a3b8">DISPONIBILIDAD</text>
+
+      <g transform="translate(0, 215)">
+        <text x="16" y="20" font-size="11px" font-weight="700" fill="#f8fafc">Paracetamol 500mg comp</text>
+        <text x="210" y="20" font-size="10px" fill="#cbd5e1">Paracetamol</text>
+        <text x="360" y="20" font-size="10px" fill="#cbd5e1">P-5002</text>
+        <text x="440" y="20" font-size="10px" fill="#cbd5e1">15/09/2027</text>
+        <rect x="560" y="8" width="95" height="20" class="badge-ok"/>
+        <text x="607" y="22" class="badge-txt">Stock: 250 uds</text>
+        <line x1="16" y1="36" x2="664" y2="36" stroke="#1e293b"/>
+      </g>
+
+      <g transform="translate(0, 258)">
+        <text x="16" y="20" font-size="11px" font-weight="700" fill="#f8fafc">Paracetamol 1g solución IV</text>
+        <text x="210" y="20" font-size="10px" fill="#cbd5e1">Paracetamol</text>
+        <text x="360" y="20" font-size="10px" fill="#cbd5e1">P-0019</text>
+        <text x="440" y="20" font-size="10px" font-weight="700" fill="#fbbf24">28/11/2026</text>
+        <rect x="560" y="8" width="95" height="20" class="badge-warn"/>
+        <text x="607" y="22" class="badge-txt">Caduca ≤ 90d (45)</text>
+        <line x1="16" y1="36" x2="664" y2="36" stroke="#1e293b"/>
+      </g>
+
+      <g transform="translate(0, 301)">
+        <text x="16" y="20" font-size="11px" font-weight="700" fill="#f8fafc">Paracetamol 100mg gotas</text>
+        <text x="210" y="20" font-size="10px" fill="#cbd5e1">Paracetamol</text>
+        <text x="360" y="20" font-size="10px" fill="#cbd5e1">PG-110</text>
+        <text x="440" y="20" font-size="10px" fill="#cbd5e1">10/01/2028</text>
+        <rect x="560" y="8" width="95" height="20" class="badge-crit"/>
+        <text x="607" y="22" class="badge-txt">Crítico: 3 uds</text>
+        <line x1="16" y1="36" x2="664" y2="36" stroke="#1e293b"/>
+      </g>
+    </g>
+  </g>
+
+  <!-- ======================================================== -->
+  <!-- SCREEN 5: FORMULARIO MEDICAMENTO (Bottom-Center)         -->
+  <!-- ======================================================== -->
+  <g transform="translate(840, 850)">
+    <rect width="720" height="690" class="wf-card"/>
+    <path d="M 0 12 Q 0 0 12 0 L 708 0 Q 720 0 720 12 L 720 40 L 0 40 Z" fill="#1e293b"/>
+    <circle cx="20" cy="20" r="5" fill="#ef4444"/>
+    <circle cx="36" cy="20" r="5" fill="#f59e0b"/>
+    <circle cx="52" cy="20" r="5" fill="#10b981"/>
+    <text x="75" y="24" class="wf-window-title">5. Formulario: Alta / Edición de Medicamento (/inventario/nuevo)</text>
+    <rect x="580" y="8" width="125" height="24" rx="12" fill="#d97706"/>
+    <text x="642" y="24" class="wf-tag" fill="#fef3c7" text-anchor="middle">Formulario</text>
+
+    <g transform="translate(35, 65)">
+      <rect width="650" height="580" class="wf-box"/>
+      <path d="M 0 6 Q 0 0 6 0 L 644 0 Q 650 0 650 6 L 650 44 L 0 44 Z" fill="#1e293b"/>
+      <text x="20" y="28" font-size="14px" font-weight="700" fill="#f8fafc">Alta / Modificación de Fármaco en Catálogo</text>
+      <text x="500" y="28" font-size="10px" fill="#94a3b8">* Campos obligatorios</text>
+
+      <g transform="translate(25, 65)">
+        <text x="0" y="14" class="wf-label">Nombre Comercial *</text>
+        <rect x="0" y="22" width="285" height="36" class="wf-box"/>
+        <text x="12" y="44" font-size="11px" fill="#f8fafc">Amoxicilina 500mg cápsulas</text>
+
+        <text x="315" y="14" class="wf-label">Principio Activo *</text>
+        <rect x="315" y="22" width="285" height="36" class="wf-box"/>
+        <text x="327" y="44" font-size="11px" fill="#f8fafc">Amoxicilina trihidratada</text>
+
+        <text x="0" y="84" class="wf-label">Código de Lote *</text>
+        <rect x="0" y="92" width="285" height="36" class="wf-box"/>
+        <text x="12" y="114" font-size="11px" fill="#f8fafc">L-2401-ESP</text>
+
+        <text x="315" y="84" class="wf-label">Fecha de Caducidad *</text>
+        <rect x="315" y="92" width="285" height="36" class="wf-box"/>
+        <text x="327" y="114" font-size="11px" fill="#f8fafc">2027-08-12 📅</text>
+      </g>
+
+      <line x1="25" y1="210" x2="625" y2="210" stroke="#334155"/>
+      <text x="25" y="235" font-size="12px" font-weight="700" fill="#38bdf8">Control de Existencias &amp; Umbrales de Seguridad</text>
+
+      <g transform="translate(25, 255)">
+        <text x="0" y="14" class="wf-label">Stock Actual *</text>
+        <rect x="0" y="22" width="185" height="36" class="wf-box"/>
+        <text x="14" y="44" font-size="12px" font-weight="700" fill="#10b981">120</text>
+        <text x="0" y="74" class="wf-text-sm">Existencias físicas en estante</text>
+
+        <text x="205" y="14" class="wf-label">Stock Mínimo *</text>
+        <rect x="205" y="22" width="185" height="36" class="wf-box"/>
+        <text x="219" y="44" font-size="12px" font-weight="700" fill="#f8fafc">30</text>
+        <text x="205" y="74" class="wf-text-sm">Dispara alerta roja de rotura</text>
+
+        <text x="410" y="14" class="wf-label">Stock Máximo *</text>
+        <rect x="410" y="22" width="185" height="36" class="wf-box"/>
+        <text x="424" y="44" font-size="12px" font-weight="700" fill="#f8fafc">200</text>
+        <text x="410" y="74" class="wf-text-sm">Dispara alerta de sobrestock</text>
+      </g>
+
+      <g transform="translate(25, 360)">
+        <rect width="600" height="48" fill="#0f172a" stroke="#334155" stroke-width="1" rx="6"/>
+        <text x="16" y="24" font-size="10px" font-weight="700" fill="#94a3b8">REGLAS DE VALIDACIÓN EN TIEMPO REAL:</text>
+        <text x="16" y="38" font-size="9px" fill="#64748b">• Unicidad: no puede existir el mismo nombre y lote · Restricción: Stock Máximo ≥ Stock Mínimo</text>
+      </g>
+
+      <g transform="translate(25, 500)">
+        <line x1="0" y1="0" x2="600" y2="0" stroke="#334155"/>
+        <rect x="350" y="18" width="100" height="36" class="wf-btn-ghost"/>
+        <text x="400" y="40" class="wf-btn-ghost-text">Cancelar</text>
+
+        <rect x="460" y="18" width="145" height="36" class="wf-btn"/>
+        <text x="532" y="40" class="wf-btn-text">Guardar Medicamento</text>
+      </g>
+    </g>
+  </g>
+
+  <!-- ======================================================== -->
+  <!-- SCREEN 6: USUARIOS & LOGIN (Bottom-Right)                -->
+  <!-- ======================================================== -->
+  <g transform="translate(1620, 850)">
+    <rect width="720" height="690" class="wf-card"/>
+    <path d="M 0 12 Q 0 0 12 0 L 708 0 Q 720 0 720 12 L 720 40 L 0 40 Z" fill="#1e293b"/>
+    <circle cx="20" cy="20" r="5" fill="#ef4444"/>
+    <circle cx="36" cy="20" r="5" fill="#f59e0b"/>
+    <circle cx="52" cy="20" r="5" fill="#10b981"/>
+    <text x="75" y="24" class="wf-window-title">6. Administración de Usuarios &amp; Autenticación (/usuarios · /login)</text>
+    <rect x="580" y="8" width="125" height="24" rx="12" fill="#4338ca"/>
+    <text x="642" y="24" class="wf-tag" fill="#c7d2fe" text-anchor="middle">Control de Acceso</text>
+
+    <!-- Top card: Aprobación de cuentas -->
+    <g transform="translate(20, 55)">
+      <text x="0" y="18" font-size="13px" font-weight="700" fill="#f8fafc">Gestión de Cuentas y Aprobaciones</text>
+      
+      <rect x="0" y="28" width="680" height="34" fill="#78350f" rx="6"/>
+      <text x="14" y="49" font-size="10px" font-weight="700" fill="#fef3c7">🔔 Hay 1 solicitud de cuenta médica pendiente de aprobación por el Administrador.</text>
+
+      <rect x="0" y="72" width="680" height="230" class="wf-box"/>
+      <rect x="1" y="73" width="678" height="28" fill="#1e293b" rx="6"/>
+      <text x="16" y="91" font-size="9px" font-weight="700" fill="#94a3b8">NOMBRE</text>
+      <text x="170" y="91" font-size="9px" font-weight="700" fill="#94a3b8">USUARIO</text>
+      <text x="280" y="91" font-size="9px" font-weight="700" fill="#94a3b8">ROL</text>
+      <text x="390" y="91" font-size="9px" font-weight="700" fill="#94a3b8">ESTADO</text>
+      <text x="540" y="91" font-size="9px" font-weight="700" fill="#94a3b8">ACCIONES</text>
+
+      <!-- User 1 -->
+      <g transform="translate(0, 105)">
+        <text x="16" y="20" font-size="10px" font-weight="700" fill="#f8fafc">Dr. Arturo (Tú)</text>
+        <text x="170" y="20" font-size="10px" fill="#cbd5e1">arturo_admin</text>
+        <rect x="280" y="8" width="55" height="18" fill="#1e3a8a" rx="4"/>
+        <text x="307" y="21" font-size="9px" font-weight="700" fill="#93c5fd" text-anchor="middle">Admin</text>
+        <text x="390" y="20" font-size="10px" fill="#10b981">Activo ✔</text>
+        <text x="540" y="20" class="wf-text-sm">—</text>
+        <line x1="16" y1="34" x2="664" y2="34" stroke="#1e293b"/>
+      </g>
+
+      <!-- User 2 -->
+      <g transform="translate(0, 145)">
+        <rect x="2" y="2" width="676" height="38" fill="rgba(245, 158, 11, 0.1)"/>
+        <text x="16" y="22" font-size="10px" font-weight="700" fill="#fde68a">Dra. Sofia Navarro</text>
+        <text x="170" y="22" font-size="10px" fill="#cbd5e1">snavarro</text>
+        <rect x="280" y="10" width="55" height="18" fill="#14532d" rx="4"/>
+        <text x="307" y="23" font-size="9px" font-weight="700" fill="#86efac" text-anchor="middle">Médico</text>
+        <rect x="390" y="10" width="65" height="18" class="badge-warn"/>
+        <text x="422" y="23" class="badge-txt">Pendiente</text>
+        
+        <rect x="540" y="8" width="55" height="22" class="wf-btn-success"/>
+        <text x="567" y="22" font-size="9px" font-weight="700" fill="#ffffff" text-anchor="middle">Aprobar</text>
+        <rect x="602" y="8" width="55" height="22" class="wf-btn-danger"/>
+        <text x="629" y="22" font-size="9px" font-weight="700" fill="#ffffff" text-anchor="middle">Eliminar</text>
+        <line x1="16" y1="42" x2="664" y2="42" stroke="#1e293b"/>
+      </g>
+    </g>
+
+    <!-- Bottom card: Login preview -->
+    <g transform="translate(140, 395)">
+      <rect width="440" height="260" class="wf-box" stroke="#38bdf8" stroke-width="1.5"/>
+      <path d="M 0 6 Q 0 0 6 0 L 434 0 Q 440 0 440 6 L 440 38 L 0 38 Z" fill="#1e293b"/>
+      <text x="20" y="24" font-size="12px" font-weight="700" fill="#f8fafc">Pantalla de Acceso (Login / Registro)</text>
+
+      <g transform="translate(30, 52)">
+        <text x="0" y="14" class="wf-label">Usuario</text>
+        <rect x="0" y="20" width="380" height="30" class="wf-box"/>
+        <text x="12" y="38" font-size="10px" fill="#cbd5e1">usuario_hospital</text>
+
+        <text x="0" y="70" class="wf-label">Contraseña</text>
+        <rect x="0" y="76" width="380" height="30" class="wf-box"/>
+        <text x="12" y="96" font-size="12px" fill="#cbd5e1">••••••••••••••</text>
+
+        <rect x="0" y="120" width="380" height="32" class="wf-btn"/>
+        <text x="190" y="140" class="wf-btn-text">Iniciar Sesión »</text>
+
+        <text x="190" y="175" class="wf-text-sm" text-anchor="middle">¿No tienes cuenta? <tspan fill="#38bdf8" font-weight="700">Regístrate como Médico o Farmacéutico</tspan></text>
+      </g>
+    </g>
+  </g>
+
+  <!-- ======================================================== -->
+  <!-- FOOTER BAR: SUMMARY & NAVIGATION FLOW                   -->
+  <!-- ======================================================== -->
+  <g transform="translate(60, 1565)">
+    <rect width="2280" height="65" rx="10" fill="#111a2e" stroke="#334155" stroke-width="1.5"/>
+    <text x="24" y="26" font-size="11px" font-weight="800" fill="#38bdf8">FLUJO PRINCIPAL DE USUARIO:</text>
+    <text x="24" y="46" font-size="11px" fill="#cbd5e1">
+      1. Login / Registro ➜ 2. Dashboard con Alertas ➜ 3. Consulta / Inventario ➜ 4. Médico crea Pedido (con apoyo de IA Ollama) ➜ 5. Farmacéutico confirma orden (descuenta stock) ➜ 6. Exportación de Auditoría CSV
+    </text>
+
+    <line x1="1650" y1="12" x2="1650" y2="52" stroke="#334155"/>
+    <text x="1670" y="38" font-size="11px" font-weight="600" fill="#94a3b8">Arquitectura UI: Responsive Server-Side Rendering (FastAPI + Jinja2 + CSS Grid)</text>
+  </g>
+</svg>

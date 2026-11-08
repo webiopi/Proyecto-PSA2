@@ -1,0 +1,55 @@
+{% extends "base.html" %}
+{% from "_macros.html" import errores_lista %}
+{% block title %}Registro{% endblock %}
+{% block bodyclass %}auth{% endblock %}
+{% block body %}
+<div class="auth-bg" aria-hidden="true"><span class="blob b1"></span><span class="blob b2"></span><span class="blob b3"></span></div>
+<main class="auth-card">
+  <div class="auth-brand">
+    <span class="brand-mark lg">
+      <svg viewBox="0 0 24 24" width="28" height="28" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><path d="M10.5 20.5a5 5 0 0 1-7-7l9-9a5 5 0 0 1 7 7z"/><path d="m8.5 8.5 7 7"/></svg>
+    </span>
+    {% if primero %}
+      <h1>Configuración inicial</h1>
+      <p>Crea la cuenta de <strong>Administrador</strong> del sistema</p>
+    {% else %}
+      <h1>Solicitar cuenta</h1>
+      <p>Un administrador deberá aprobar tu acceso</p>
+    {% endif %}
+  </div>
+
+  {{ errores_lista(errores) }}
+
+  <form method="post" action="/registro" class="form">
+    <label class="field">
+      <span>Nombre completo</span>
+      <input id="nombre" name="nombre" type="text" value="{{ nombre or '' }}" required maxlength="100" autocomplete="name">
+    </label>
+    <label class="field">
+      <span>Usuario</span>
+      <input id="usuario" name="usuario" type="text" value="{{ usuario or '' }}" required minlength="3" maxlength="32" pattern="[A-Za-z0-9_.\-]+" autocomplete="username">
+      <small>Letras, números, punto, guion y guion bajo.</small>
+    </label>
+    {% if not primero %}
+    <label class="field">
+      <span>Rol solicitado</span>
+      <select id="rol" name="rol">
+        {% for r in roles %}<option value="{{ r }}" {{ 'selected' if rol == r }}>{{ r }}</option>{% endfor %}
+      </select>
+    </label>
+    {% endif %}
+    <div class="grid-2">
+      <label class="field">
+        <span>Contraseña</span>
+        <input id="password" name="password" type="password" required minlength="8" maxlength="128" autocomplete="new-password">
+      </label>
+      <label class="field">
+        <span>Repetir contraseña</span>
+        <input id="password2" name="password2" type="password" required minlength="8" maxlength="128" autocomplete="new-password">
+      </label>
+    </div>
+    <button id="btn-registro" class="btn btn-primary btn-block btn-lg" type="submit">{{ 'Crear administrador' if primero else 'Enviar solicitud' }}</button>
+  </form>
+  {% if not primero %}<p class="auth-alt">¿Ya tienes cuenta? <a href="/login">Iniciar sesión</a></p>{% endif %}
+</main>
+{% endblock %}

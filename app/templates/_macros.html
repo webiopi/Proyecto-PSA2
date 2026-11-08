@@ -1,0 +1,109 @@
+{% macro flash(msg, tipo) %}
+{% if msg %}
+<div class="flash flash-{{ tipo }}" role="status" data-autodismiss>
+  <span>{{ msg }}</span>
+  <button type="button" class="flash-close" aria-label="Cerrar">×</button>
+</div>
+{% endif %}
+{% endmacro %}
+
+{% macro errores_lista(errores) %}
+{% if errores %}
+<div class="flash flash-error" role="alert">
+  <ul class="err-list">{% for e in errores %}<li>{{ e }}</li>{% endfor %}</ul>
+</div>
+{% endif %}
+{% endmacro %}
+
+{% macro badges(m) %}
+{%- for a in alertas(m) -%}
+<span class="badge badge-{{ a.css }}">{{ a.label }}</span>
+{%- else -%}
+<span class="badge badge-ok">OK</span>
+{%- endfor -%}
+{% endmacro %}
+
+{% macro pagination(res, base_qs) %}
+{% if res.pages > 1 or res.total %}
+<nav class="pager" aria-label="Paginación">
+  <span class="pager-info">{{ res.total }} resultado{{ '' if res.total == 1 else 's' }} · Página {{ res.page }} de {{ res.pages }}</span>
+  <div class="pager-links">
+    {% set sep = '&' if base_qs else '' %}
+    {% if res.page > 1 %}<a class="pg" href="?{{ base_qs }}{{ sep }}page={{ res.page - 1 }}">‹ Anterior</a>{% endif %}
+    {% for p in range([1, res.page - 2]|max, [res.pages, res.page + 2]|min + 1) %}
+      <a class="pg {{ 'active' if p == res.page else '' }}" href="?{{ base_qs }}{{ sep }}page={{ p }}">{{ p }}</a>
+    {% endfor %}
+    {% if res.page < res.pages %}<a class="pg" href="?{{ base_qs }}{{ sep }}page={{ res.page + 1 }}">Siguiente ›</a>{% endif %}
+  </div>
+</nav>
+{% endif %}
+{% endmacro %}
+
+{% macro tabla_meds(items, acciones=False) %}
+<div class="table-wrap">
+<table class="table">
+  <thead>
+    <tr>
+      <th>Medicamento</th><th>Principio activo</th><th>Lote</th><th>Caducidad</th>
+      <th class="num">Stock</th><th class="num">Mín</th><th class="num">Máx</th><th>Estado</th>
+      {% if acciones %}<th class="actions-col">Acciones</th>{% endif %}
+    </tr>
+  </thead>
+  <tbody>
+  {% for m in items %}
+    {% set codes = alertas(m)|map(attribute='code')|list %}
+    <tr class="{{ 'row-alert' if codes else '' }}">
+      <td data-label="Medicamento"><strong>{{ m.nombre }}</strong></td>
+      <td data-label="Principio activo">{{ m.principio_activo }}</td>
+      <td data-label="Lote"><code>{{ m.lote }}</code></td>
+      <td data-label="Caducidad" class="{{ 'cell-danger' if 'caducado' in codes or 'por_caducar' in codes else '' }}">{{ m.fecha_caducidad.strftime('%d/%m/%Y') }}</td>
+      <td data-label="Stock" class="num {{ 'cell-danger' if 'bajo_minimo' in codes else ('cell-over' if 'sobre_maximo' in codes else '') }}"><strong>{{ m.stock_actual }}</strong></td>
+      <td data-label="Mín" class="num muted">{{ m.stock_minimo }}</td>
+      <td data-label="Máx" class="num muted">{{ m.stock_maximo }}</td>
+      <td data-label="Estado">{{ badges(m) }}</td>
+      {% if acciones %}
+      <td class="actions-col">
+        <a class="btn btn-sm btn-ghost" href="/inventario/{{ m.id }}/editar">Editar</a>
+        <form method="post" action="/inventario/{{ m.id }}/eliminar" class="inline" data-confirm="¿Eliminar «{{ m.nombre }}» (lote {{ m.lote }})? Esta acción no se puede deshacer.">
+          <button class="btn btn-sm btn-danger-ghost" type="submit">Eliminar</button>
+        </form>
+      </td>
+      {% endif %}
+    </tr>
+  {% else %}
+    <tr><td colspan="{{ 9 if acciones else 8 }}" class="empty">No se encontraron medicamentos.</td></tr>
+  {% endfor %}
+  </tbody>
+</table>
+</div>
+{% endmacro %}
+
+{% macro estado_orden(o) %}
+<span class="badge badge-{{ 'ok' if o.estado == 'Confirmada' else ('danger' if o.estado == 'Rechazada' else 'over') }}">{{ o.estado }}</span>
+{% endmacro %}
+
+{% macro detalle_items(o) %}
+{%- for it in o.items -%}{{ it.cantidad }} × {{ it.medicamento.nombre }} <small>(lote {{ it.medicamento.lote }})</small>{{ '; ' if not loop.last }}{%- endfor -%}
+{% endmacro %}
+
+{% macro tabla_ordenes(ordenes) %}
+<div class="table-wrap">
+<table class="table">
+  <thead><tr><th>Orden</th><th>Fecha</th><th>Médico</th><th>Medicamentos</th><th class="num">Unidades</th><th>Estado</th></tr></thead>
+  <tbody>
+  {% for o in ordenes %}
+    <tr>
+      <td data-label="Orden"><strong>#{{ o.id }}</strong></td>
+      <td data-label="Fecha">{{ o.creado_en.strftime('%d/%m/%Y %H:%M') }}</td>
+      <td data-label="Médico">{{ o.medico.nombre }}</td>
+      <td data-label="Medicamentos">{{ detalle_items(o) }}</td>
+      <td data-label="Unidades" class="num">{{ o.total_unidades }}</td>
+      <td data-label="Estado">{{ estado_orden(o) }}</td>
+    </tr>
+  {% else %}
+    <tr><td colspan="6" class="empty">Aún no hay órdenes de compra.</td></tr>
+  {% endfor %}
+  </tbody>
+</table>
+</div>
+{% endmacro %}

@@ -1,0 +1,38 @@
+{% extends "layout.html" %}
+{% from "_macros.html" import tabla_meds, pagination %}
+{% block title %}Consulta{% endblock %}
+{% block heading %}Consulta de inventario{% endblock %}
+{% block subheading %}Busca por nombre, principio activo o lote{% endblock %}
+{% block content %}
+<section class="card">
+  <form method="get" action="/consulta" class="filters" id="filtros">
+    <label class="field">
+      <span>Nombre</span>
+      <input id="f-nombre" name="nombre" type="search" value="{{ f.nombre }}" placeholder="Ej. Paracetamol" maxlength="100">
+    </label>
+    <label class="field">
+      <span>Principio activo</span>
+      <input id="f-principio" name="principio" type="search" value="{{ f.principio }}" placeholder="Ej. Ibuprofeno" maxlength="100">
+    </label>
+    <label class="field">
+      <span>Lote</span>
+      <input id="f-lote" name="lote" type="search" value="{{ f.lote }}" placeholder="Ej. L2411" maxlength="50">
+    </label>
+    <label class="field">
+      <span>Estado</span>
+      <select id="f-estado" name="estado">
+        {% for k, v in estados.items() %}<option value="{{ k }}" {{ 'selected' if f.estado == k }}>{{ v }}</option>{% endfor %}
+      </select>
+    </label>
+    <div class="filters-actions">
+      <button class="btn btn-primary" id="btn-buscar" type="submit">Buscar</button>
+      <a class="btn btn-ghost" href="/consulta">Limpiar</a>
+    </div>
+  </form>
+</section>
+
+<section class="card flush">
+  {{ tabla_meds(res["items"]) }}
+  {{ pagination(res, base_qs) }}
+</section>
+{% endblock %}

@@ -1,0 +1,50 @@
+{% extends "layout.html" %}
+{% from "_macros.html" import errores_lista %}
+{% block title %}{{ 'Editar' if editando else 'Nuevo' }} medicamento{% endblock %}
+{% block heading %}{{ 'Editar medicamento' if editando else 'Nuevo medicamento' }}{% endblock %}
+{% block subheading %}Completa los datos del lote{% endblock %}
+{% block content %}
+<section class="card form-card">
+  {{ errores_lista(errores) }}
+  <form method="post" class="form" data-dias-alerta="{{ dias_alerta }}" action="{{ '/inventario/%d/editar' % med.id if editando else '/inventario/nuevo' }}" id="med-form">
+    <div class="grid-2">
+      <label class="field">
+        <span>Nombre comercial / genérico</span>
+        <input id="nombre" name="nombre" type="text" value="{{ valores.nombre or '' }}" required maxlength="150">
+      </label>
+      <label class="field">
+        <span>Principio activo</span>
+        <input id="principio_activo" name="principio_activo" type="text" value="{{ valores.principio_activo or '' }}" required maxlength="150">
+      </label>
+      <label class="field">
+        <span>Lote</span>
+        <input id="lote" name="lote" type="text" value="{{ valores.lote or '' }}" required maxlength="50">
+      </label>
+      <label class="field">
+        <span>Fecha de caducidad</span>
+        <input id="fecha_caducidad" name="fecha_caducidad" type="date" value="{{ valores.fecha_caducidad or '' }}" required>
+        <small id="hint-fecha" class="hint"></small>
+      </label>
+    </div>
+    <div class="grid-3">
+      <label class="field">
+        <span>Stock actual</span>
+        <input id="stock_actual" name="stock_actual" type="number" min="0" max="10000000" step="1" value="{{ valores.stock_actual if valores.stock_actual is not none else '' }}" required>
+      </label>
+      <label class="field">
+        <span>Stock mínimo</span>
+        <input id="stock_minimo" name="stock_minimo" type="number" min="0" max="10000000" step="1" value="{{ valores.stock_minimo if valores.stock_minimo is not none else '' }}" required>
+      </label>
+      <label class="field">
+        <span>Stock máximo</span>
+        <input id="stock_maximo" name="stock_maximo" type="number" min="0" max="10000000" step="1" value="{{ valores.stock_maximo if valores.stock_maximo is not none else '' }}" required>
+      </label>
+    </div>
+    <p id="hint-stock" class="hint"></p>
+    <div class="form-actions">
+      <a class="btn btn-ghost" href="/inventario">Cancelar</a>
+      <button class="btn btn-primary" id="btn-guardar" type="submit">{{ 'Guardar cambios' if editando else 'Agregar medicamento' }}</button>
+    </div>
+  </form>
+</section>
+{% endblock %}

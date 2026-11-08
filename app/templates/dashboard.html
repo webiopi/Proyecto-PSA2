@@ -1,0 +1,105 @@
+{% extends "layout.html" %}
+{% from "_macros.html" import tabla_meds, badges, tabla_ordenes %}
+{% block title %}Reportes{% endblock %}
+{% block heading %}Reportes{% endblock %}
+{% block subheading %}Resumen del estado del inventario{% endblock %}
+{% block actions %}
+{% if puede_exportar %}
+<div class="dropdown">
+  <button class="btn btn-primary" type="button" id="btn-exportar" data-dropdown>⬇ Exportar CSV</button>
+  <div class="dropdown-menu" role="menu">
+    <a href="/reportes/exportar.csv?tipo=todo" role="menuitem">Inventario completo</a>
+    <a href="/reportes/exportar.csv?tipo=caducar" role="menuitem">Caducados / por caducar</a>
+    <a href="/reportes/exportar.csv?tipo=critico" role="menuitem">Stock crítico</a>
+    <a href="/reportes/exportar.csv?tipo=ordenes" role="menuitem">Órdenes de compra</a>
+  </div>
+</div>
+{% endif %}
+{% endblock %}
+
+{% block content %}
+<section class="stats" aria-label="Indicadores">
+  <article class="stat stat-blue">
+    <span class="stat-label">Total de medicamentos</span>
+    <span class="stat-value" data-count="{{ resumen.total }}">{{ resumen.total }}</span>
+    <span class="stat-foot">Registros en inventario</span>
+  </article>
+  <article class="stat stat-amber">
+    <span class="stat-label">Próximos a caducar</span>
+    <span class="stat-value" data-count="{{ resumen.por_caducar }}">{{ resumen.por_caducar }}</span>
+    <span class="stat-foot">En los próximos {{ dias_alerta }} días{% if resumen.caducados %} · <strong>{{ resumen.caducados }} ya caducado{{ '' if resumen.caducados == 1 else 's' }}</strong>{% endif %}</span>
+  </article>
+  <article class="stat stat-red">
+    <span class="stat-label">Stock crítico</span>
+    <span class="stat-value" data-count="{{ resumen.stock_critico }}">{{ resumen.stock_critico }}</span>
+    <span class="stat-foot">Por debajo del mínimo{% if resumen.sobre_maximo %} · {{ resumen.sobre_maximo }} sobre el máximo{% endif %}</span>
+  </article>
+  <article class="stat stat-health">
+    <div class="donut" style="--p: {{ pct_sanos }}"><span>{{ pct_sanos }}%</span></div>
+    <div>
+      <span class="stat-label">Salud del inventario</span>
+      <span class="stat-foot">{{ resumen.total - resumen.con_alertas }} de {{ resumen.total }} sin alertas</span>
+    </div>
+  </article>
+</section>
+
+<section class="grid-2 gap">
+  <article class="card">
+    <header class="card-head">
+      <h2>⏳ Próximos a caducar</h2>
+      {% if puede_exportar %}<a class="link" href="/reportes/exportar.csv?tipo=caducar">CSV</a>{% endif %}
+    </header>
+    {% if caducan %}
+    <ul class="list">
+      {% for m in caducan %}
+      <li>
+        <div><strong>{{ m.nombre }}</strong><small>Lote {{ m.lote }} · {{ m.fecha_caducidad.strftime('%d/%m/%Y') }}</small></div>
+        {{ badges(m) }}
+      </li>
+      {% endfor %}
+    </ul>
+    {% else %}<p class="empty">Sin medicamentos próximos a caducar 🎉</p>{% endif %}
+  </article>
+
+  <article class="card">
+    <header class="card-head">
+      <h2>📉 Stock crítico</h2>
+      {% if puede_exportar %}<a class="link" href="/reportes/exportar.csv?tipo=critico">CSV</a>{% endif %}
+    </header>
+    {% if criticos %}
+    <ul class="list">
+      {% for m in criticos %}
+      <li>
+        <div><strong>{{ m.nombre }}</strong><small>Lote {{ m.lote }} · mínimo {{ m.stock_minimo }}</small></div>
+        <span class="stock-pill">{{ m.stock_actual }} <small>uds</small></span>
+      </li>
+      {% endfor %}
+    </ul>
+    {% else %}<p class="empty">Todo el stock está sobre el mínimo 🎉</p>{% endif %}
+  </article>
+</section>
+
+<section class="card flush" id="ordenes-reporte">
+  <header class="card-head pad">
+    <div>
+      <h2>🧾 Órdenes de compra</h2>
+      <p class="muted">{{ 'Tus pedidos más recientes' if user.rol == 'Médico' else 'Pedidos más recientes de los médicos' }}</p>
+    </div>
+    {% if puede_exportar %}<a class="link" href="/reportes/exportar.csv?tipo=ordenes">CSV</a>{% endif %}
+  </header>
+  {{ tabla_ordenes(ordenes) }}
+</section>
+
+{% if puede_exportar %}
+<section class="card ai-card" id="ai-card">
+  <header class="card-head">
+    <div>
+      <h2>✨ Análisis con IA <span class="tag">Ollama</span></h2>
+      <p class="muted">Sugerencias de compra y acciones sobre caducidades y stock crítico, generadas por un modelo local.</p>
+    </div>
+    <button class="btn btn-primary" id="btn-ia" type="button">Generar análisis</button>
+  </header>
+  <div id="ai-result" class="ai-result" hidden aria-live="polite"></div>
+</section>
+{% endif %}
+{% endblock %}
